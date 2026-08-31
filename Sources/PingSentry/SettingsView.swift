@@ -6,7 +6,6 @@ struct SettingsView: View {
     @AppStorage("host") private var host: String = "1.1.1.1"
     @AppStorage("intervalSeconds") private var intervalSeconds: Double = 2.0
     @AppStorage("windowSize") private var windowSize: Int = 20
-    @AppStorage("pingTimeoutSeconds") private var pingTimeoutSeconds: Double = 2.0
     @AppStorage("showLatency") private var showLatency: Bool = true
     @AppStorage("showLossPercent") private var showLossPercent: Bool = true
     @AppStorage("showBarsIcon") private var showBarsIcon: Bool = true
@@ -25,7 +24,6 @@ struct SettingsView: View {
                     Button("Applica", action: applyHost)
                 }
                 Stepper("Intervallo tra i ping: \(Int(intervalSeconds)) s", value: $intervalSeconds, in: 1...60)
-                Stepper("Timeout ping: \(Int(pingTimeoutSeconds)) s", value: $pingTimeoutSeconds, in: 1...10)
                 Stepper("Finestra calcolo perdita: \(windowSize) ping", value: $windowSize, in: 5...100, step: 5)
             }
 
@@ -75,9 +73,6 @@ struct SettingsView: View {
         }
         .onChange(of: windowSize) { _, newValue in
             monitor.windowSize = newValue
-        }
-        .onChange(of: pingTimeoutSeconds) { _, newValue in
-            monitor.pingTimeoutSeconds = newValue
         }
     }
 

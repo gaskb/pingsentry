@@ -1,21 +1,29 @@
 import SwiftUI
 
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    var monitor: PingMonitor?
+
+    func applicationWillTerminate(_ notification: Notification) {
+        monitor?.stop()
+    }
+}
+
 @main
 struct PingSentryApp: App {
     @StateObject private var monitor: PingMonitor
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     init() {
         let defaults = UserDefaults.standard
         let host = defaults.string(forKey: "host") ?? "1.1.1.1"
         let interval = defaults.object(forKey: "intervalSeconds") as? Double ?? 2.0
         let window = defaults.object(forKey: "windowSize") as? Int ?? 20
-        let timeout = defaults.object(forKey: "pingTimeoutSeconds") as? Double ?? 2.0
         let notify = defaults.object(forKey: "notifyOnStateChange") as? Bool ?? true
 
         let created = PingMonitor(host: host, intervalSeconds: interval, windowSize: window)
-        created.pingTimeoutSeconds = timeout
         created.notifyOnStateChange = notify
         _monitor = StateObject(wrappedValue: created)
+        appDelegate.monitor = created
     }
 
     var body: some Scene {

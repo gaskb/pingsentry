@@ -25,10 +25,9 @@ final class PingMonitor: ObservableObject {
     private(set) var host: String
     var intervalSeconds: Double
     var windowSize: Int
-    var pingTimeoutSeconds: Double = 2.0
     var notifyOnStateChange: Bool = true
 
-    private var loopTask: Task<Void, Never>?
+    private let pinger = PersistentPinger()
     private let maxHistory = 100
     private let downThreshold = 3
     private var consecutiveFailures = 0
@@ -50,29 +49,25 @@ final class PingMonitor: ObservableObject {
     }
 
     func start() {
-        stop()
         consecutiveFailures = 0
         hasNotifiedDown = false
-        loopTask = Task { [weak self] in
-            while let self, !Task.isCancelled {
-                await self.pingOnce()
-                let delay = max(self.intervalSeconds, 1)
-                try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-            }
+        pinger.onResult = { [weak self] result in
+            self?.record(result)
         }
+        pinger.start(host: host, intervalSeconds: intervalSeconds)
     }
 
     func stop() {
-        loopTask?.cancel()
-        loopTask = nil
+        pinger.stop()
     }
 
     func restart() {
+        stop()
         start()
     }
 
     func pingNow() {
-        Task { await pingOnce() }
+        restart()
     }
 
     var quality: SignalQuality {
@@ -87,11 +82,6 @@ final class PingMonitor: ObservableObject {
         case ..<150: return .fair
         default: return .poor
         }
-    }
-
-    private func pingOnce() async {
-        let result = await Self.runPing(host: host, timeoutSeconds: pingTimeoutSeconds)
-        record(result)
     }
 
     private func record(_ result: PingResult) {
@@ -138,40 +128,5 @@ final class PingMonitor: ObservableObject {
                 }
             }
         }
-    }
-
-    nonisolated private static func runPing(host: String, timeoutSeconds: Double) async -> PingResult {
-        await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .utility).async {
-                let now = Date()
-                let process = Process()
-                process.executableURL = URL(fileURLWithPath: "/sbin/ping")
-                let timeout = max(Int(timeoutSeconds.rounded()), 1)
-                process.arguments = ["-c", "1", "-t", String(timeout), host]
-
-                let outPipe = Pipe()
-                process.standardOutput = outPipe
-                process.standardError = Pipe()
-
-                do {
-                    try process.run()
-                    process.waitUntilExit()
-                    let data = outPipe.fileHandleForReading.readDataToEndOfFile()
-                    let output = String(data: data, encoding: .utf8) ?? ""
-                    let latency = parseLatency(from: output)
-                    let success = process.terminationStatus == 0 && latency != nil
-                    continuation.resume(returning: PingResult(timestamp: now, success: success, latencyMs: latency))
-                } catch {
-                    continuation.resume(returning: PingResult(timestamp: now, success: false, latencyMs: nil))
-                }
-            }
-        }
-    }
-
-    nonisolated private static func parseLatency(from output: String) -> Double? {
-        guard let range = output.range(of: "time=") else { return nil }
-        let after = output[range.upperBound...]
-        let numberPart = after.prefix { $0.isNumber || $0 == "." }
-        return Double(numberPart)
     }
 }
