@@ -32,6 +32,9 @@
 "about.description" = "菜单栏网络监控工具：定期 Ping 你选择的主机，并显示质量指示和丢包百分比。";
 "about.repository" = "GitHub 仓库";
 
+"about.support_text" = "PingSentry 是免费的——如果你喜欢，欢迎请我喝杯咖啡。";
+"about.support_link" = "请我喝咖啡";
+
 /* Stats */
 "stats.window_title" = "统计";
 "stats.current_session" = "当前会话";

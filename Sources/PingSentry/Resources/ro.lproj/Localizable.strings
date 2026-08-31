@@ -32,6 +32,9 @@
 "about.description" = "Monitor de rețea din bara de meniu: ping periodic către un host la alegere, cu indicator de calitate și procent de pachete pierdute.";
 "about.repository" = "Depozit pe GitHub";
 
+"about.support_text" = "PingSentry este gratuit — dacă îți place, simte-te liber să-mi oferi o cafea.";
+"about.support_link" = "Oferă-mi o cafea";
+
 /* Stats */
 "stats.window_title" = "Statistici";
 "stats.current_session" = "Sesiunea curentă";

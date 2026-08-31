@@ -32,6 +32,9 @@
 "about.description" = "Netzwerk-Monitor für die Menüleiste: periodischer Ping an einen Host deiner Wahl, mit Qualitätsanzeige und Paketverlust in Prozent.";
 "about.repository" = "Repository auf GitHub";
 
+"about.support_text" = "PingSentry ist kostenlos — wenn sie dir gefällt, spendier mir gerne einen Kaffee.";
+"about.support_link" = "Spendier mir einen Kaffee";
+
 /* Stats */
 "stats.window_title" = "Statistik";
 "stats.current_session" = "Aktuelle Sitzung";
