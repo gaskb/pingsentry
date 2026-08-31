@@ -32,6 +32,11 @@ struct PingSentryApp: App {
         }
         .windowResizability(.contentSize)
 
+        Window("Statistiche", id: "stats") {
+            StatsView(monitor: monitor)
+        }
+        .windowResizability(.contentSize)
+
         Settings {
             SettingsView(monitor: monitor)
         }

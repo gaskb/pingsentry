@@ -19,8 +19,10 @@ final class PingMonitor: ObservableObject {
     @Published private(set) var lastLatencyMs: Double?
     @Published private(set) var lossPercent: Double = 0
     @Published private(set) var lastFailed: Bool = false
+    @Published private(set) var sessionStats = PingStats()
+    @Published private(set) var lifetimeStats = PingStats()
 
-    var host: String
+    private(set) var host: String
     var intervalSeconds: Double
     var windowSize: Int
     var pingTimeoutSeconds: Double = 2.0
@@ -36,6 +38,15 @@ final class PingMonitor: ObservableObject {
         self.host = host
         self.intervalSeconds = intervalSeconds
         self.windowSize = windowSize
+        self.lifetimeStats = LifetimeStatsStore.load(for: host)
+    }
+
+    func changeHost(to newHost: String) {
+        guard newHost != host else { return }
+        host = newHost
+        sessionStats = PingStats()
+        lifetimeStats = LifetimeStatsStore.load(for: newHost)
+        restart()
     }
 
     func start() {
@@ -94,6 +105,10 @@ final class PingMonitor: ObservableObject {
         let window = history.suffix(max(windowSize, 1))
         let failures = window.filter { !$0.success }.count
         lossPercent = window.isEmpty ? 0 : (Double(failures) / Double(window.count)) * 100.0
+
+        sessionStats.record(result)
+        lifetimeStats.record(result)
+        LifetimeStatsStore.save(lifetimeStats, for: host)
 
         handleStateChange(success: result.success)
     }

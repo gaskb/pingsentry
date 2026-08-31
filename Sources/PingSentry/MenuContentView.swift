@@ -23,6 +23,10 @@ struct MenuContentView: View {
                 monitor.pingNow()
             }
 
+            Button("Statistiche…") {
+                openWindow(id: "stats")
+            }
+
             Button("Impostazioni…") {
                 openSettings()
             }

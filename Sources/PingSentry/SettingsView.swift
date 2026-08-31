@@ -88,7 +88,6 @@ struct SettingsView: View {
             return
         }
         host = trimmed
-        monitor.host = trimmed
-        monitor.restart()
+        monitor.changeHost(to: trimmed)
     }
 }
