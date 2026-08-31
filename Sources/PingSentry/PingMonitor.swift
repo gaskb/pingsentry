@@ -23,9 +23,14 @@ final class PingMonitor: ObservableObject {
     var host: String
     var intervalSeconds: Double
     var windowSize: Int
+    var pingTimeoutSeconds: Double = 2.0
+    var notifyOnStateChange: Bool = true
 
     private var loopTask: Task<Void, Never>?
     private let maxHistory = 100
+    private let downThreshold = 3
+    private var consecutiveFailures = 0
+    private var hasNotifiedDown = false
 
     init(host: String, intervalSeconds: Double, windowSize: Int) {
         self.host = host
@@ -35,6 +40,8 @@ final class PingMonitor: ObservableObject {
 
     func start() {
         stop()
+        consecutiveFailures = 0
+        hasNotifiedDown = false
         loopTask = Task { [weak self] in
             while let self, !Task.isCancelled {
                 await self.pingOnce()
@@ -53,6 +60,10 @@ final class PingMonitor: ObservableObject {
         start()
     }
 
+    func pingNow() {
+        Task { await pingOnce() }
+    }
+
     var quality: SignalQuality {
         if lossPercent >= 50 { return .none }
         guard !lastFailed, let latency = lastLatencyMs else {
@@ -68,7 +79,7 @@ final class PingMonitor: ObservableObject {
     }
 
     private func pingOnce() async {
-        let result = await Self.runPing(host: host)
+        let result = await Self.runPing(host: host, timeoutSeconds: pingTimeoutSeconds)
         record(result)
     }
 
@@ -83,15 +94,45 @@ final class PingMonitor: ObservableObject {
         let window = history.suffix(max(windowSize, 1))
         let failures = window.filter { !$0.success }.count
         lossPercent = window.isEmpty ? 0 : (Double(failures) / Double(window.count)) * 100.0
+
+        handleStateChange(success: result.success)
     }
 
-    nonisolated private static func runPing(host: String) async -> PingResult {
+    private func handleStateChange(success: Bool) {
+        let currentHost = host
+        if success {
+            consecutiveFailures = 0
+            if hasNotifiedDown {
+                hasNotifiedDown = false
+                if notifyOnStateChange {
+                    NotificationManager.send(
+                        title: "PingSentry",
+                        body: "\(currentHost) è di nuovo raggiungibile"
+                    )
+                }
+            }
+        } else {
+            consecutiveFailures += 1
+            if consecutiveFailures >= downThreshold && !hasNotifiedDown {
+                hasNotifiedDown = true
+                if notifyOnStateChange {
+                    NotificationManager.send(
+                        title: "PingSentry",
+                        body: "\(currentHost) non risponde da \(downThreshold) ping"
+                    )
+                }
+            }
+        }
+    }
+
+    nonisolated private static func runPing(host: String, timeoutSeconds: Double) async -> PingResult {
         await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .utility).async {
                 let now = Date()
                 let process = Process()
                 process.executableURL = URL(fileURLWithPath: "/sbin/ping")
-                process.arguments = ["-c", "1", "-t", "2", host]
+                let timeout = max(Int(timeoutSeconds.rounded()), 1)
+                process.arguments = ["-c", "1", "-t", String(timeout), host]
 
                 let outPipe = Pipe()
                 process.standardOutput = outPipe

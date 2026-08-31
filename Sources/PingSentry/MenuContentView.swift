@@ -2,30 +2,10 @@ import SwiftUI
 
 struct MenuContentView: View {
     @ObservedObject var monitor: PingMonitor
-    @Binding var host: String
-    @Binding var intervalSeconds: Double
-    @Binding var windowSize: Int
-
-    @State private var hostDraft: String = ""
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            statusSection
-            Divider()
-            settingsSection
-            Divider()
-            Button("Esci") {
-                NSApplication.shared.terminate(nil)
-            }
-        }
-        .padding(12)
-        .frame(width: 260)
-        .onAppear {
-            hostDraft = host
-        }
-    }
-
-    private var statusSection: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(monitor.host).font(.headline)
             if let latency = monitor.lastLatencyMs, !monitor.lastFailed {
@@ -34,44 +14,29 @@ struct MenuContentView: View {
                 Text("Ultimo ping: timeout")
                     .foregroundStyle(.red)
             }
-            Text("Pacchetti persi: \(String(format: "%.0f", monitor.lossPercent))% (ultimi \(windowSize))")
+            Text("Pacchetti persi: \(String(format: "%.0f", monitor.lossPercent))% (ultimi \(monitor.windowSize))")
                 .foregroundStyle(.secondary)
-        }
-    }
 
-    private var settingsSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Impostazioni").font(.subheadline).bold()
+            Divider()
 
-            HStack {
-                TextField("es. 1.1.1.1", text: $hostDraft)
-                    .textFieldStyle(.roundedBorder)
-                    .onSubmit(applyHost)
-                Button("OK", action: applyHost)
+            Button("Pinga ora") {
+                monitor.pingNow()
             }
 
-            Stepper(value: $intervalSeconds, in: 1...60, step: 1) {
-                Text("Intervallo: \(Int(intervalSeconds)) s")
+            Button("Impostazioni…") {
+                openSettings()
             }
-            .onChange(of: intervalSeconds) { _, newValue in
-                monitor.intervalSeconds = newValue
-                monitor.restart()
+            .keyboardShortcut(",")
+
+            Button("Info su PingSentry") {
+                openWindow(id: "about")
             }
 
-            Stepper(value: $windowSize, in: 5...100, step: 5) {
-                Text("Finestra loss: \(windowSize) ping")
-            }
-            .onChange(of: windowSize) { _, newValue in
-                monitor.windowSize = newValue
+            Divider()
+
+            Button("Esci") {
+                NSApplication.shared.terminate(nil)
             }
         }
-    }
-
-    private func applyHost() {
-        let trimmed = hostDraft.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
-        host = trimmed
-        monitor.host = trimmed
-        monitor.restart()
     }
 }
