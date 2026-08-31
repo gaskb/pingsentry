@@ -30,8 +30,7 @@
 "about.window_title" = "Despre PingSentry";
 "about.version_format" = "Versiunea %@";
 "about.description" = "Monitor de rețea din bara de meniu: ping periodic către un host la alegere, cu indicator de calitate și procent de pachete pierdute.";
-"about.repository" = "Depozit pe GitLab";
-"about.developer" = "Dezvoltat de Gas";
+"about.repository" = "Depozit pe GitHub";
 
 /* Stats */
 "stats.window_title" = "Statistici";

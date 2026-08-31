@@ -10,6 +10,7 @@ APP_BUNDLE="$DIST_DIR/$APP_NAME.app"
 RESOURCE_BUNDLE="${APP_NAME}_${APP_NAME}.bundle"
 
 VERSION=$(grep -oE '"[0-9]+\.[0-9]+\.[0-9]+"' "$ROOT_DIR/Sources/PingSentry/Version.swift" | tr -d '"')
+COPYRIGHT_YEAR=$(date +%Y)
 
 echo "Building $APP_NAME $VERSION (release)..."
 swift build -c release --package-path "$ROOT_DIR"
@@ -48,7 +49,7 @@ cat > "$APP_BUNDLE/Contents/Info.plist" <<PLIST
     <key>LSUIElement</key>
     <true/>
     <key>NSHumanReadableCopyright</key>
-    <string>© Gas</string>
+    <string>© $COPYRIGHT_YEAR GasKB</string>
 </dict>
 </plist>
 PLIST

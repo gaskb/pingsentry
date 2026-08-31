@@ -30,8 +30,7 @@
 "about.window_title" = "Acerca de PingSentry";
 "about.version_format" = "Versión %@";
 "about.description" = "Monitor de red en la barra de menús: ping periódico a un host de tu elección, con indicador de calidad y porcentaje de paquetes perdidos.";
-"about.repository" = "Repositorio en GitLab";
-"about.developer" = "Desarrollado por Gas";
+"about.repository" = "Repositorio en GitHub";
 
 /* Stats */
 "stats.window_title" = "Estadísticas";

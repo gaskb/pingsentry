@@ -30,8 +30,7 @@
 "about.window_title" = "O aplikacji PingSentry";
 "about.version_format" = "Wersja %@";
 "about.description" = "Monitor sieci na pasku menu: okresowy ping do wybranego hosta, ze wskaźnikiem jakości i procentem utraconych pakietów.";
-"about.repository" = "Repozytorium na GitLab";
-"about.developer" = "Stworzone przez Gas";
+"about.repository" = "Repozytorium na GitHub";
 
 /* Stats */
 "stats.window_title" = "Statystyki";

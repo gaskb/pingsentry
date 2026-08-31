@@ -21,10 +21,10 @@ struct AboutView: View {
                 .font(.callout)
                 .frame(maxWidth: 280)
 
-            Link(L("about.repository"), destination: URL(string: "http://gitlab.gaskb.net/root/pingsentry")!)
+            Link(L("about.repository"), destination: URL(string: "https://github.com/gaskb/pingsentry")!)
                 .font(.callout)
 
-            Text(L("about.developer"))
+            Text("Powered by GasKB")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
