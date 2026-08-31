@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Hacer ping ahora";
+"menu.stats" = "Estadísticas…";
+"menu.settings" = "Ajustes…";
+"menu.about" = "Acerca de PingSentry";
+"menu.quit" = "Salir";
+"menu.last_ping" = "Último ping";
+"menu.timeout" = "Tiempo agotado";
+"menu.packet_loss_format" = "Pérdida de paquetes: %d%% (últimos %d)";
+
+/* Settings */
+"settings.section.connection" = "Conexión";
+"settings.host_placeholder" = "Host o IP";
+"settings.apply" = "Aplicar";
+"settings.interval_format" = "Intervalo entre pings: %d s";
+"settings.window_format" = "Ventana de cálculo de pérdida: %d pings";
+"settings.section.display" = "Qué mostrar en la barra de menús";
+"settings.show_bars" = "Icono de barras";
+"settings.show_latency" = "Latencia (ms)";
+"settings.show_loss" = "Porcentaje de paquetes perdidos";
+"settings.section.notifications" = "Notificaciones";
+"settings.notify_toggle" = "Avisar cuando el host deje de responder o vuelva a estar disponible";
+"settings.section.startup" = "Inicio";
+"settings.launch_at_login" = "Iniciar PingSentry al iniciar sesión";
+"settings.login_item_error_format" = "No disponible: %@";
+"settings.section.language" = "Idioma";
+"language.system" = "Idioma del sistema";
+
+/* About */
+"about.window_title" = "Acerca de PingSentry";
+"about.version_format" = "Versión %@";
+"about.description" = "Monitor de red en la barra de menús: ping periódico a un host de tu elección, con indicador de calidad y porcentaje de paquetes perdidos.";
+"about.repository" = "Repositorio en GitLab";
+"about.developer" = "Desarrollado por Gas";
+
+/* Stats */
+"stats.window_title" = "Estadísticas";
+"stats.current_session" = "Sesión actual";
+"stats.lifetime" = "Histórico (para este host)";
+"stats.total" = "Pings totales";
+"stats.successful" = "Con respuesta";
+"stats.failed" = "Sin respuesta";
+"stats.average" = "Media";
+"stats.fastest" = "Más rápido";
+"stats.slowest" = "Más lento";
+
+/* Notifications */
+"notification.host_down_format" = "%@ no responde (%d pings fallidos consecutivos)";
+"notification.host_up_format" = "%@ vuelve a estar disponible";

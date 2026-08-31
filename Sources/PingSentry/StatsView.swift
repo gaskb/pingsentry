@@ -2,15 +2,16 @@ import SwiftUI
 
 struct StatsView: View {
     @ObservedObject var monitor: PingMonitor
+    @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(monitor.host)
                 .font(.headline)
 
-            statsBlock(title: "Sessione corrente", stats: monitor.sessionStats)
+            statsBlock(title: L("stats.current_session"), stats: monitor.sessionStats)
             Divider()
-            statsBlock(title: "Lifetime (per questo host)", stats: monitor.lifetimeStats)
+            statsBlock(title: L("stats.lifetime"), stats: monitor.lifetimeStats)
 
             Spacer()
         }
@@ -21,12 +22,12 @@ struct StatsView: View {
     private func statsBlock(title: String, stats: PingStats) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title).font(.subheadline).bold()
-            row("Ping totali", "\(stats.totalCount)")
-            row("Con risposta", "\(stats.successCount) (\(percentString(stats.successPercent)))")
-            row("Senza risposta", "\(stats.failureCount) (\(percentString(stats.failurePercent)))")
-            row("Media", msString(stats.averageLatency))
-            row("Più veloce", msString(stats.minLatency))
-            row("Più lento", msString(stats.maxLatency))
+            row(L("stats.total"), "\(stats.totalCount)")
+            row(L("stats.successful"), "\(stats.successCount) (\(percentString(stats.successPercent)))")
+            row(L("stats.failed"), "\(stats.failureCount) (\(percentString(stats.failurePercent)))")
+            row(L("stats.average"), msString(stats.averageLatency))
+            row(L("stats.fastest"), msString(stats.minLatency))
+            row(L("stats.slowest"), msString(stats.maxLatency))
         }
     }
 

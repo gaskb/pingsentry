@@ -10,6 +10,7 @@ struct SettingsView: View {
     @AppStorage("showLossPercent") private var showLossPercent: Bool = true
     @AppStorage("showBarsIcon") private var showBarsIcon: Bool = true
     @AppStorage("notifyOnStateChange") private var notifyOnStateChange: Bool = true
+    @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
 
     @State private var hostDraft: String = ""
     @State private var launchAtLoginEnabled = false
@@ -17,24 +18,24 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("Connessione") {
+            Section(L("settings.section.connection")) {
                 HStack {
-                    TextField("Host o IP", text: $hostDraft)
+                    TextField(L("settings.host_placeholder"), text: $hostDraft)
                         .onSubmit(applyHost)
-                    Button("Applica", action: applyHost)
+                    Button(L("settings.apply"), action: applyHost)
                 }
-                Stepper("Intervallo tra i ping: \(Int(intervalSeconds)) s", value: $intervalSeconds, in: 1...60)
-                Stepper("Finestra calcolo perdita: \(windowSize) ping", value: $windowSize, in: 5...100, step: 5)
+                Stepper(L("settings.interval_format", Int(intervalSeconds)), value: $intervalSeconds, in: 1...60)
+                Stepper(L("settings.window_format", windowSize), value: $windowSize, in: 5...100, step: 5)
             }
 
-            Section("Cosa mostrare in barra") {
-                Toggle("Icona a barre", isOn: $showBarsIcon)
-                Toggle("Latenza (ms)", isOn: $showLatency)
-                Toggle("Percentuale pacchetti persi", isOn: $showLossPercent)
+            Section(L("settings.section.display")) {
+                Toggle(L("settings.show_bars"), isOn: $showBarsIcon)
+                Toggle(L("settings.show_latency"), isOn: $showLatency)
+                Toggle(L("settings.show_loss"), isOn: $showLossPercent)
             }
 
-            Section("Notifiche") {
-                Toggle("Avvisa quando l'host non risponde o torna su", isOn: $notifyOnStateChange)
+            Section(L("settings.section.notifications")) {
+                Toggle(L("settings.notify_toggle"), isOn: $notifyOnStateChange)
                     .onChange(of: notifyOnStateChange) { _, newValue in
                         monitor.notifyOnStateChange = newValue
                         if newValue {
@@ -43,14 +44,14 @@ struct SettingsView: View {
                     }
             }
 
-            Section("Avvio") {
-                Toggle("Avvia PingSentry al login", isOn: $launchAtLoginEnabled)
+            Section(L("settings.section.startup")) {
+                Toggle(L("settings.launch_at_login"), isOn: $launchAtLoginEnabled)
                     .onChange(of: launchAtLoginEnabled) { _, newValue in
                         do {
                             try LoginItemManager.setEnabled(newValue)
                             loginItemError = nil
                         } catch {
-                            loginItemError = "Non disponibile: \(error.localizedDescription)"
+                            loginItemError = L("settings.login_item_error_format", error.localizedDescription)
                             launchAtLoginEnabled = LoginItemManager.isEnabled
                         }
                     }
@@ -60,9 +61,19 @@ struct SettingsView: View {
                         .foregroundStyle(.red)
                 }
             }
+
+            Section(L("settings.section.language")) {
+                Picker(L("settings.section.language"), selection: $appLanguage) {
+                    ForEach(AppLanguage.allCases) { language in
+                        Text(language.nativeName).tag(language.rawValue)
+                    }
+                }
+                .labelsHidden()
+                .pickerStyle(.menu)
+            }
         }
         .formStyle(.grouped)
-        .frame(width: 420, height: 440)
+        .frame(width: 420, height: 500)
         .onAppear {
             hostDraft = host
             launchAtLoginEnabled = LoginItemManager.isEnabled

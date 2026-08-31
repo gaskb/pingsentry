@@ -1,15 +1,65 @@
 # PingSentry
 
-App per la menu bar di macOS che esegue un ping periodico verso un host configurabile e ne mostra lo stato in barra: icona a barre (stile segnale wifi, 4 livelli) più latenza e percentuale di pacchetti persi (es. `10ms (0%)`).
+*[Italiano sotto / Italian below](#pingsentry-italiano)*
 
-Nata per sostituire un vecchio widget di terze parti non più mantenuto e non più disponibile.
+A macOS menu bar app that periodically pings a host of your choice and shows the result right next to the clock: a wifi-style signal bars icon plus latency and packet-loss percentage (e.g. `▂▄▆█ 9ms (0%)`).
+
+Built to replace a ~10-year-old third-party menu bar widget that macOS was about to stop running.
+
+## How it works
+
+- Swift + SwiftUI, using `MenuBarExtra` (macOS 14+).
+- Ping runs as a single long-lived `ping -i <interval> <host>` process for the whole monitoring session (not one process per ping — that used to inflate every latency reading with a "cold first packet" cost). Output is parsed line by line; packet loss is detected from gaps in `icmp_seq`.
+- Menu bar label, notifications, session/lifetime stats (total pings, success/failure count and %, average/fastest/slowest latency), launch-at-login, and an in-app language picker are all configurable from Settings.
+
+## Development
+
+```bash
+swift build
+swift run
+```
+
+`swift run` launches the app as a plain process (you'll also see a Dock icon, which the packaged `.app` hides via `LSUIElement`). Login item and notifications only work from a packaged `.app` with a bundle identifier — `swift run` alone can't exercise those two features.
+
+To build a distributable `.app` bundle (ad-hoc signed, not notarized):
+
+```bash
+./Scripts/build_app.sh
+```
+
+## Project layout
+
+- `Sources/PingSentry/PingSentryApp.swift` — app entry point, menu bar label, window scenes.
+- `Sources/PingSentry/PersistentPinger.swift` — the long-lived ping process and its output parser.
+- `Sources/PingSentry/PingMonitor.swift` — ping loop orchestration, rolling packet-loss window, notifications.
+- `Sources/PingSentry/PingStats.swift` — session/lifetime counters.
+- `Sources/PingSentry/Localization.swift` — in-app language override (independent of the macOS system language).
+- `Sources/PingSentry/Resources/*.lproj/` — translated strings.
+- `Sources/PingSentry/MenuContentView.swift`, `SettingsView.swift`, `AboutView.swift`, `StatsView.swift` — UI.
+
+## Localization
+
+Supported languages: English, Italian, French, German, Spanish, Portuguese, Polish, Romanian, and Simplified Chinese. The in-app language picker (Settings → Language) defaults to "System Language" (auto-detected from macOS, falling back to English) but can be overridden per-user regardless of the OS setting.
+
+All translations were written by an AI assistant rather than reviewed by a native speaker. Confidence is reasonably high for French, German, Spanish, and Portuguese; **Polish, Romanian, and Simplified Chinese are the least certain and would most benefit from a native speaker's review.** If you speak one of these languages and spot an awkward phrasing or outright mistake, contributions are very welcome — the relevant files are the `.strings` tables under `Sources/PingSentry/Resources/<language-code>.lproj/Localizable.strings`; open a pull request or an issue with the fix.
+
+## Distribution
+
+Not yet notarized. Plan: a notarized DMG published via GitLab/GitHub Releases, which needs an Apple Developer ID account to be set up separately.
+
+---
+
+# PingSentry (Italiano)
+
+App per la barra menu di macOS che esegue un ping periodico verso un host a scelta e ne mostra il risultato accanto all'orologio: un'icona a barre stile segnale wifi più latenza e percentuale di pacchetti persi (es. `▂▄▆█ 9ms (0%)`).
+
+Nata per sostituire un vecchio widget di terze parti (~10 anni) che macOS stava per smettere di far funzionare.
 
 ## Come funziona
 
-- Costruita con Swift + SwiftUI (`MenuBarExtra`, richiede macOS 13+).
-- Il ping non usa raw ICMP socket (che richiederebbero entitlement particolari in sandbox), ma lancia `/sbin/ping -c 1 -t 2 <host>` come processo esterno e ne parsa l'output.
-- La percentuale di pacchetti persi è calcolata su una finestra scorrevole degli ultimi N ping (configurabile).
-- Host, intervallo e finestra sono configurabili dal menu dell'app e persistiti in `UserDefaults`.
+- Swift + SwiftUI, con `MenuBarExtra` (macOS 14+).
+- Il ping gira come un unico processo `ping -i <intervallo> <host>` per tutta la sessione di monitoraggio (non un processo per ogni ping — cosa che gonfiava ogni misura di latenza con il costo del "primo pacchetto a freddo"). L'output viene letto riga per riga; i pacchetti persi si rilevano dai buchi nella sequenza `icmp_seq`.
+- Etichetta in barra, notifiche, statistiche di sessione/lifetime (ping totali, conteggio e % di successi/fallimenti, latenza media/minima/massima), avvio automatico al login e selettore di lingua sono tutti configurabili dalle Impostazioni.
 
 ## Sviluppo
 
@@ -18,15 +68,30 @@ swift build
 swift run
 ```
 
-`swift run` avvia l'app come processo semplice (comparirà anche un'icona nel Dock, assente invece nel bundle `.app` finale grazie a `LSUIElement`).
+`swift run` avvia l'app come processo semplice (comparirà anche un'icona nel Dock, assente invece nel bundle `.app` grazie a `LSUIElement`). Avvio automatico al login e notifiche funzionano solo con un `.app` pacchettizzato con un bundle identifier — `swift run` da solo non basta per queste due funzionalità.
 
-## Struttura
+Per costruire un bundle `.app` distribuibile (firmato ad-hoc, non notarizzato):
 
-- `Sources/PingSentry/PingSentryApp.swift` — entry point e label della menu bar.
-- `Sources/PingSentry/PingMonitor.swift` — logica di ping, storico, calcolo qualità/loss.
-- `Sources/PingSentry/StatusIconRenderer.swift` — disegno dell'icona a barre.
-- `Sources/PingSentry/MenuContentView.swift` — contenuto del menu a tendina (stato + impostazioni).
+```bash
+./Scripts/build_app.sh
+```
+
+## Struttura del progetto
+
+- `Sources/PingSentry/PingSentryApp.swift` — entry point, etichetta in barra, finestre.
+- `Sources/PingSentry/PersistentPinger.swift` — il processo ping persistente e il suo parser.
+- `Sources/PingSentry/PingMonitor.swift` — orchestrazione del ciclo di ping, finestra di calcolo della perdita, notifiche.
+- `Sources/PingSentry/PingStats.swift` — contatori di sessione/lifetime.
+- `Sources/PingSentry/Localization.swift` — override della lingua a livello di app (indipendente dalla lingua di sistema di macOS).
+- `Sources/PingSentry/Resources/*.lproj/` — stringhe tradotte.
+- `Sources/PingSentry/MenuContentView.swift`, `SettingsView.swift`, `AboutView.swift`, `StatsView.swift` — interfaccia.
+
+## Localizzazione
+
+Lingue supportate: italiano, inglese, francese, tedesco, spagnolo, portoghese, polacco, rumeno e cinese semplificato. Il selettore di lingua nell'app (Impostazioni → Language) parte da "System Language" (rilevata automaticamente da macOS, con fallback all'inglese) ma può essere forzato dall'utente indipendentemente dall'impostazione del sistema operativo.
+
+Tutte le traduzioni sono state scritte da un assistente IA, non riviste da un madrelingua. La confidenza è ragionevolmente alta per francese, tedesco, spagnolo e portoghese; **polacco, rumeno e cinese semplificato sono le meno certe e trarrebbero più beneficio da una revisione di un madrelingua.** Se parli una di queste lingue e noti una frase innaturale o un errore, i contributi sono benvenuti — i file interessati sono le tabelle `.strings` sotto `Sources/PingSentry/Resources/<codice-lingua>.lproj/Localizable.strings`; apri una pull request o una issue con la correzione.
 
 ## Distribuzione
 
-Non ancora impacchettata come `.app` firmata/notarizzata. Piano: build script che genera il bundle `.app`, poi DMG notarizzata (richiede un Apple Developer ID account, da configurare a parte) distribuita via GitLab Releases.
+Non ancora notarizzata. Piano: una DMG notarizzata pubblicata via GitLab/GitHub Releases, che richiede un account Apple Developer ID da configurare a parte.

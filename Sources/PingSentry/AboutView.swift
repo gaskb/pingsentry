@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AboutView: View {
+    @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
+
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: "dot.radiowaves.left.and.right")
@@ -11,18 +13,18 @@ struct AboutView: View {
                 .font(.title2)
                 .bold()
 
-            Text("Versione \(AppVersion.current)")
+            Text(L("about.version_format", AppVersion.current))
                 .foregroundStyle(.secondary)
 
-            Text("Monitor di rete da barra menu: ping periodico su un host a scelta, con indicatore di qualità e percentuale di pacchetti persi.")
+            Text(L("about.description"))
                 .multilineTextAlignment(.center)
                 .font(.callout)
                 .frame(maxWidth: 280)
 
-            Link("Repository su GitLab", destination: URL(string: "http://gitlab.gaskb.net/root/pingsentry")!)
+            Link(L("about.repository"), destination: URL(string: "http://gitlab.gaskb.net/root/pingsentry")!)
                 .font(.callout)
 
-            Text("Sviluppato da Gas")
+            Text(L("about.developer"))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }

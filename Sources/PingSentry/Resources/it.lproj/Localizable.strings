@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Ping ora";
+"menu.stats" = "Statistiche…";
+"menu.settings" = "Impostazioni…";
+"menu.about" = "Info su PingSentry";
+"menu.quit" = "Esci";
+"menu.last_ping" = "Ultimo ping";
+"menu.timeout" = "Timeout";
+"menu.packet_loss_format" = "Pacchetti persi: %d%% (ultimi %d)";
+
+/* Settings */
+"settings.section.connection" = "Connessione";
+"settings.host_placeholder" = "Host o IP";
+"settings.apply" = "Applica";
+"settings.interval_format" = "Intervallo tra i ping: %d s";
+"settings.window_format" = "Finestra calcolo perdita: %d ping";
+"settings.section.display" = "Cosa mostrare in barra";
+"settings.show_bars" = "Icona a barre";
+"settings.show_latency" = "Latenza (ms)";
+"settings.show_loss" = "Percentuale pacchetti persi";
+"settings.section.notifications" = "Notifiche";
+"settings.notify_toggle" = "Avvisa quando l'host non risponde o torna su";
+"settings.section.startup" = "Avvio";
+"settings.launch_at_login" = "Avvia PingSentry al login";
+"settings.login_item_error_format" = "Non disponibile: %@";
+"settings.section.language" = "Lingua";
+"language.system" = "Lingua di sistema";
+
+/* About */
+"about.window_title" = "Info su PingSentry";
+"about.version_format" = "Versione %@";
+"about.description" = "Monitor di rete da barra menu: ping periodico su un host a scelta, con indicatore di qualità e percentuale di pacchetti persi.";
+"about.repository" = "Repository su GitLab";
+"about.developer" = "Sviluppato da Gas";
+
+/* Stats */
+"stats.window_title" = "Statistiche";
+"stats.current_session" = "Sessione corrente";
+"stats.lifetime" = "Lifetime (per questo host)";
+"stats.total" = "Ping totali";
+"stats.successful" = "Con risposta";
+"stats.failed" = "Senza risposta";
+"stats.average" = "Media";
+"stats.fastest" = "Più veloce";
+"stats.slowest" = "Più lento";
+
+/* Notifications */
+"notification.host_down_format" = "%@ non risponde (%d ping falliti consecutivi)";
+"notification.host_up_format" = "%@ è di nuovo raggiungibile";

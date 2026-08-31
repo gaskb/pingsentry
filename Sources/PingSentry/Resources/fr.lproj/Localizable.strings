@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Ping maintenant";
+"menu.stats" = "Statistiques…";
+"menu.settings" = "Réglages…";
+"menu.about" = "À propos de PingSentry";
+"menu.quit" = "Quitter";
+"menu.last_ping" = "Dernier ping";
+"menu.timeout" = "Délai dépassé";
+"menu.packet_loss_format" = "Perte de paquets : %d%% (%d derniers)";
+
+/* Settings */
+"settings.section.connection" = "Connexion";
+"settings.host_placeholder" = "Hôte ou IP";
+"settings.apply" = "Appliquer";
+"settings.interval_format" = "Intervalle entre les pings : %d s";
+"settings.window_format" = "Fenêtre de calcul des pertes : %d pings";
+"settings.section.display" = "À afficher dans la barre de menus";
+"settings.show_bars" = "Icône à barres";
+"settings.show_latency" = "Latence (ms)";
+"settings.show_loss" = "Pourcentage de perte de paquets";
+"settings.section.notifications" = "Notifications";
+"settings.notify_toggle" = "Avertir quand l'hôte cesse de répondre ou redevient joignable";
+"settings.section.startup" = "Démarrage";
+"settings.launch_at_login" = "Lancer PingSentry à la connexion";
+"settings.login_item_error_format" = "Indisponible : %@";
+"settings.section.language" = "Langue";
+"language.system" = "Langue du système";
+
+/* About */
+"about.window_title" = "À propos de PingSentry";
+"about.version_format" = "Version %@";
+"about.description" = "Moniteur réseau dans la barre de menus : ping périodique vers un hôte de votre choix, avec un indicateur de qualité et le pourcentage de paquets perdus.";
+"about.repository" = "Dépôt sur GitLab";
+"about.developer" = "Développé par Gas";
+
+/* Stats */
+"stats.window_title" = "Statistiques";
+"stats.current_session" = "Session en cours";
+"stats.lifetime" = "Depuis toujours (pour cet hôte)";
+"stats.total" = "Pings totaux";
+"stats.successful" = "Réussis";
+"stats.failed" = "Échoués";
+"stats.average" = "Moyenne";
+"stats.fastest" = "Le plus rapide";
+"stats.slowest" = "Le plus lent";
+
+/* Notifications */
+"notification.host_down_format" = "%@ ne répond pas (%d pings consécutifs échoués)";
+"notification.host_up_format" = "%@ est de nouveau joignable";

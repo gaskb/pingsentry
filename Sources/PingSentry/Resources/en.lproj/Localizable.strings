@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Ping now";
+"menu.stats" = "Stats…";
+"menu.settings" = "Settings…";
+"menu.about" = "About PingSentry";
+"menu.quit" = "Quit";
+"menu.last_ping" = "Last ping";
+"menu.timeout" = "Timeout";
+"menu.packet_loss_format" = "Packet loss: %d%% (last %d)";
+
+/* Settings */
+"settings.section.connection" = "Connection";
+"settings.host_placeholder" = "Host or IP";
+"settings.apply" = "Apply";
+"settings.interval_format" = "Ping interval: %d s";
+"settings.window_format" = "Packet-loss window: %d pings";
+"settings.section.display" = "What to show in the menu bar";
+"settings.show_bars" = "Bars icon";
+"settings.show_latency" = "Latency (ms)";
+"settings.show_loss" = "Packet loss percentage";
+"settings.section.notifications" = "Notifications";
+"settings.notify_toggle" = "Notify when the host stops responding or comes back";
+"settings.section.startup" = "Startup";
+"settings.launch_at_login" = "Launch PingSentry at login";
+"settings.login_item_error_format" = "Not available: %@";
+"settings.section.language" = "Language";
+"language.system" = "System Language";
+
+/* About */
+"about.window_title" = "About PingSentry";
+"about.version_format" = "Version %@";
+"about.description" = "Menu bar network monitor: periodic ping to a host of your choice, with a quality indicator and packet-loss percentage.";
+"about.repository" = "Repository on GitLab";
+"about.developer" = "Developed by Gas";
+
+/* Stats */
+"stats.window_title" = "Stats";
+"stats.current_session" = "Current session";
+"stats.lifetime" = "Lifetime (this host)";
+"stats.total" = "Total pings";
+"stats.successful" = "Successful";
+"stats.failed" = "Failed";
+"stats.average" = "Average";
+"stats.fastest" = "Fastest";
+"stats.slowest" = "Slowest";
+
+/* Notifications */
+"notification.host_down_format" = "%@ is not responding (%d consecutive failed pings)";
+"notification.host_up_format" = "%@ is reachable again";

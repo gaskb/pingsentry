@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuContentView: View {
     @ObservedObject var monitor: PingMonitor
+    @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
     @Environment(\.openWindow) private var openWindow
     @Environment(\.openSettings) private var openSettings
 
@@ -9,36 +10,36 @@ struct MenuContentView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(monitor.host).font(.headline)
             if let latency = monitor.lastLatencyMs, !monitor.lastFailed {
-                Text("Ultimo ping: \(String(format: "%.1f", latency)) ms")
+                Text("\(L("menu.last_ping")): \(String(format: "%.1f", latency)) ms")
             } else {
-                Text("Ultimo ping: timeout")
+                Text("\(L("menu.last_ping")): \(L("menu.timeout"))")
                     .foregroundStyle(.red)
             }
-            Text("Pacchetti persi: \(String(format: "%.0f", monitor.lossPercent))% (ultimi \(monitor.windowSize))")
+            Text(L("menu.packet_loss_format", Int(monitor.lossPercent.rounded()), monitor.windowSize))
                 .foregroundStyle(.secondary)
 
             Divider()
 
-            Button("Pinga ora") {
+            Button(L("menu.ping_now")) {
                 monitor.pingNow()
             }
 
-            Button("Statistiche…") {
+            Button(L("menu.stats")) {
                 openWindow(id: "stats")
             }
 
-            Button("Impostazioni…") {
+            Button(L("menu.settings")) {
                 openSettings()
             }
             .keyboardShortcut(",")
 
-            Button("Info su PingSentry") {
+            Button(L("menu.about")) {
                 openWindow(id: "about")
             }
 
             Divider()
 
-            Button("Esci") {
+            Button(L("menu.quit")) {
                 NSApplication.shared.terminate(nil)
             }
         }

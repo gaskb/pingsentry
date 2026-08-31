@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Jetzt pingen";
+"menu.stats" = "Statistik…";
+"menu.settings" = "Einstellungen…";
+"menu.about" = "Über PingSentry";
+"menu.quit" = "Beenden";
+"menu.last_ping" = "Letzter Ping";
+"menu.timeout" = "Zeitüberschreitung";
+"menu.packet_loss_format" = "Paketverlust: %d%% (letzte %d)";
+
+/* Settings */
+"settings.section.connection" = "Verbindung";
+"settings.host_placeholder" = "Host oder IP";
+"settings.apply" = "Übernehmen";
+"settings.interval_format" = "Ping-Intervall: %d s";
+"settings.window_format" = "Fenster für Verlustberechnung: %d Pings";
+"settings.section.display" = "Anzeige in der Menüleiste";
+"settings.show_bars" = "Balkensymbol";
+"settings.show_latency" = "Latenz (ms)";
+"settings.show_loss" = "Paketverlust in Prozent";
+"settings.section.notifications" = "Benachrichtigungen";
+"settings.notify_toggle" = "Benachrichtigen, wenn der Host nicht mehr oder wieder antwortet";
+"settings.section.startup" = "Start";
+"settings.launch_at_login" = "PingSentry bei der Anmeldung starten";
+"settings.login_item_error_format" = "Nicht verfügbar: %@";
+"settings.section.language" = "Sprache";
+"language.system" = "Systemsprache";
+
+/* About */
+"about.window_title" = "Über PingSentry";
+"about.version_format" = "Version %@";
+"about.description" = "Netzwerk-Monitor für die Menüleiste: periodischer Ping an einen Host deiner Wahl, mit Qualitätsanzeige und Paketverlust in Prozent.";
+"about.repository" = "Repository auf GitLab";
+"about.developer" = "Entwickelt von Gas";
+
+/* Stats */
+"stats.window_title" = "Statistik";
+"stats.current_session" = "Aktuelle Sitzung";
+"stats.lifetime" = "Gesamt (für diesen Host)";
+"stats.total" = "Pings insgesamt";
+"stats.successful" = "Erfolgreich";
+"stats.failed" = "Fehlgeschlagen";
+"stats.average" = "Durchschnitt";
+"stats.fastest" = "Schnellster";
+"stats.slowest" = "Langsamster";
+
+/* Notifications */
+"notification.host_down_format" = "%@ antwortet nicht (%d aufeinanderfolgende fehlgeschlagene Pings)";
+"notification.host_up_format" = "%@ ist wieder erreichbar";

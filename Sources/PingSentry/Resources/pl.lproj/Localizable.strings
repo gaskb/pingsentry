@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Pinguj teraz";
+"menu.stats" = "Statystyki…";
+"menu.settings" = "Ustawienia…";
+"menu.about" = "O aplikacji PingSentry";
+"menu.quit" = "Zakończ";
+"menu.last_ping" = "Ostatni ping";
+"menu.timeout" = "Przekroczono czas";
+"menu.packet_loss_format" = "Utracone pakiety: %d%% (ostatnie %d)";
+
+/* Settings */
+"settings.section.connection" = "Połączenie";
+"settings.host_placeholder" = "Host lub IP";
+"settings.apply" = "Zastosuj";
+"settings.interval_format" = "Odstęp między pingami: %d s";
+"settings.window_format" = "Okno obliczania strat: %d pingów";
+"settings.section.display" = "Co pokazywać na pasku menu";
+"settings.show_bars" = "Ikona z paskami";
+"settings.show_latency" = "Opóźnienie (ms)";
+"settings.show_loss" = "Procent utraconych pakietów";
+"settings.section.notifications" = "Powiadomienia";
+"settings.notify_toggle" = "Powiadamiaj, gdy host przestaje odpowiadać lub znów odpowiada";
+"settings.section.startup" = "Uruchamianie";
+"settings.launch_at_login" = "Uruchamiaj PingSentry przy logowaniu";
+"settings.login_item_error_format" = "Niedostępne: %@";
+"settings.section.language" = "Język";
+"language.system" = "Język systemu";
+
+/* About */
+"about.window_title" = "O aplikacji PingSentry";
+"about.version_format" = "Wersja %@";
+"about.description" = "Monitor sieci na pasku menu: okresowy ping do wybranego hosta, ze wskaźnikiem jakości i procentem utraconych pakietów.";
+"about.repository" = "Repozytorium na GitLab";
+"about.developer" = "Stworzone przez Gas";
+
+/* Stats */
+"stats.window_title" = "Statystyki";
+"stats.current_session" = "Bieżąca sesja";
+"stats.lifetime" = "Od zawsze (dla tego hosta)";
+"stats.total" = "Pingi łącznie";
+"stats.successful" = "Udane";
+"stats.failed" = "Nieudane";
+"stats.average" = "Średnia";
+"stats.fastest" = "Najszybszy";
+"stats.slowest" = "Najwolniejszy";
+
+/* Notifications */
+"notification.host_down_format" = "%@ nie odpowiada (%d kolejnych nieudanych pingów)";
+"notification.host_up_format" = "%@ jest znów dostępny";

@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "立即 Ping";
+"menu.stats" = "统计…";
+"menu.settings" = "设置…";
+"menu.about" = "关于 PingSentry";
+"menu.quit" = "退出";
+"menu.last_ping" = "上次 Ping";
+"menu.timeout" = "超时";
+"menu.packet_loss_format" = "丢包率：%d%%（最近 %d 次）";
+
+/* Settings */
+"settings.section.connection" = "连接";
+"settings.host_placeholder" = "主机或 IP";
+"settings.apply" = "应用";
+"settings.interval_format" = "Ping 间隔：%d 秒";
+"settings.window_format" = "丢包率计算窗口：%d 次";
+"settings.section.display" = "菜单栏显示内容";
+"settings.show_bars" = "信号条图标";
+"settings.show_latency" = "延迟（毫秒）";
+"settings.show_loss" = "丢包百分比";
+"settings.section.notifications" = "通知";
+"settings.notify_toggle" = "主机无响应或恢复时通知我";
+"settings.section.startup" = "启动";
+"settings.launch_at_login" = "登录时启动 PingSentry";
+"settings.login_item_error_format" = "不可用：%@";
+"settings.section.language" = "语言";
+"language.system" = "系统语言";
+
+/* About */
+"about.window_title" = "关于 PingSentry";
+"about.version_format" = "版本 %@";
+"about.description" = "菜单栏网络监控工具：定期 Ping 你选择的主机，并显示质量指示和丢包百分比。";
+"about.repository" = "GitLab 仓库";
+"about.developer" = "由 Gas 开发";
+
+/* Stats */
+"stats.window_title" = "统计";
+"stats.current_session" = "当前会话";
+"stats.lifetime" = "历史累计（此主机）";
+"stats.total" = "Ping 总数";
+"stats.successful" = "成功";
+"stats.failed" = "失败";
+"stats.average" = "平均值";
+"stats.fastest" = "最快";
+"stats.slowest" = "最慢";
+
+/* Notifications */
+"notification.host_down_format" = "%@ 无响应（连续 %d 次 Ping 失败）";
+"notification.host_up_format" = "%@ 已恢复可访问";

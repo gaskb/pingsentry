@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Ping acum";
+"menu.stats" = "Statistici…";
+"menu.settings" = "Preferințe…";
+"menu.about" = "Despre PingSentry";
+"menu.quit" = "Ieșire";
+"menu.last_ping" = "Ultimul ping";
+"menu.timeout" = "Timp expirat";
+"menu.packet_loss_format" = "Pachete pierdute: %d%% (ultimele %d)";
+
+/* Settings */
+"settings.section.connection" = "Conexiune";
+"settings.host_placeholder" = "Host sau IP";
+"settings.apply" = "Aplică";
+"settings.interval_format" = "Interval între ping-uri: %d s";
+"settings.window_format" = "Fereastră de calcul a pierderilor: %d ping-uri";
+"settings.section.display" = "Ce se afișează în bara de meniu";
+"settings.show_bars" = "Pictogramă cu bare";
+"settings.show_latency" = "Latență (ms)";
+"settings.show_loss" = "Procent de pachete pierdute";
+"settings.section.notifications" = "Notificări";
+"settings.notify_toggle" = "Anunță când host-ul nu mai răspunde sau revine online";
+"settings.section.startup" = "Pornire";
+"settings.launch_at_login" = "Pornește PingSentry la conectare";
+"settings.login_item_error_format" = "Indisponibil: %@";
+"settings.section.language" = "Limbă";
+"language.system" = "Limba sistemului";
+
+/* About */
+"about.window_title" = "Despre PingSentry";
+"about.version_format" = "Versiunea %@";
+"about.description" = "Monitor de rețea din bara de meniu: ping periodic către un host la alegere, cu indicator de calitate și procent de pachete pierdute.";
+"about.repository" = "Depozit pe GitLab";
+"about.developer" = "Dezvoltat de Gas";
+
+/* Stats */
+"stats.window_title" = "Statistici";
+"stats.current_session" = "Sesiunea curentă";
+"stats.lifetime" = "Total (pentru acest host)";
+"stats.total" = "Ping-uri totale";
+"stats.successful" = "Reușite";
+"stats.failed" = "Eșuate";
+"stats.average" = "Medie";
+"stats.fastest" = "Cel mai rapid";
+"stats.slowest" = "Cel mai lent";
+
+/* Notifications */
+"notification.host_down_format" = "%@ nu răspunde (%d ping-uri eșuate consecutive)";
+"notification.host_up_format" = "%@ este din nou accesibil";

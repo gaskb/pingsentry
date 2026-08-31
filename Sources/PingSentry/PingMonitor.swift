@@ -112,7 +112,7 @@ final class PingMonitor: ObservableObject {
                 if notifyOnStateChange {
                     NotificationManager.send(
                         title: "PingSentry",
-                        body: "\(currentHost) è di nuovo raggiungibile"
+                        body: L("notification.host_up_format", currentHost)
                     )
                 }
             }
@@ -123,7 +123,7 @@ final class PingMonitor: ObservableObject {
                 if notifyOnStateChange {
                     NotificationManager.send(
                         title: "PingSentry",
-                        body: "\(currentHost) non risponde da \(downThreshold) ping"
+                        body: L("notification.host_down_format", currentHost, downThreshold)
                     )
                 }
             }

@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 struct PingSentryApp: App {
     @StateObject private var monitor: PingMonitor
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
 
     init() {
         let defaults = UserDefaults.standard
@@ -35,12 +36,12 @@ struct PingSentryApp: App {
         }
         .menuBarExtraStyle(.menu)
 
-        Window("Info su PingSentry", id: "about") {
+        Window(LocalizedStringKey(L("about.window_title")), id: "about") {
             AboutView()
         }
         .windowResizability(.contentSize)
 
-        Window("Statistiche", id: "stats") {
+        Window(LocalizedStringKey(L("stats.window_title")), id: "stats") {
             StatsView(monitor: monitor)
         }
         .windowResizability(.contentSize)

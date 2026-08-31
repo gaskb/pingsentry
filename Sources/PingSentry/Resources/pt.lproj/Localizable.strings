@@ -1,0 +1,49 @@
+/* Menu */
+"menu.ping_now" = "Fazer ping agora";
+"menu.stats" = "Estatísticas…";
+"menu.settings" = "Preferências…";
+"menu.about" = "Sobre o PingSentry";
+"menu.quit" = "Sair";
+"menu.last_ping" = "Último ping";
+"menu.timeout" = "Tempo esgotado";
+"menu.packet_loss_format" = "Perda de pacotes: %d%% (últimos %d)";
+
+/* Settings */
+"settings.section.connection" = "Ligação";
+"settings.host_placeholder" = "Host ou IP";
+"settings.apply" = "Aplicar";
+"settings.interval_format" = "Intervalo entre pings: %d s";
+"settings.window_format" = "Janela de cálculo de perda: %d pings";
+"settings.section.display" = "O que mostrar na barra de menus";
+"settings.show_bars" = "Ícone de barras";
+"settings.show_latency" = "Latência (ms)";
+"settings.show_loss" = "Percentagem de pacotes perdidos";
+"settings.section.notifications" = "Notificações";
+"settings.notify_toggle" = "Avisar quando o host deixar de responder ou voltar a responder";
+"settings.section.startup" = "Arranque";
+"settings.launch_at_login" = "Iniciar o PingSentry ao iniciar sessão";
+"settings.login_item_error_format" = "Indisponível: %@";
+"settings.section.language" = "Idioma";
+"language.system" = "Idioma do sistema";
+
+/* About */
+"about.window_title" = "Sobre o PingSentry";
+"about.version_format" = "Versão %@";
+"about.description" = "Monitor de rede na barra de menus: ping periódico a um host à sua escolha, com indicador de qualidade e percentagem de pacotes perdidos.";
+"about.repository" = "Repositório no GitLab";
+"about.developer" = "Desenvolvido por Gas";
+
+/* Stats */
+"stats.window_title" = "Estatísticas";
+"stats.current_session" = "Sessão atual";
+"stats.lifetime" = "Histórico (para este host)";
+"stats.total" = "Pings totais";
+"stats.successful" = "Com resposta";
+"stats.failed" = "Sem resposta";
+"stats.average" = "Média";
+"stats.fastest" = "Mais rápido";
+"stats.slowest" = "Mais lento";
+
+/* Notifications */
+"notification.host_down_format" = "%@ não responde (%d pings falhados consecutivos)";
+"notification.host_up_format" = "%@ está novamente acessível";

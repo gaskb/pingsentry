@@ -7,6 +7,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_DIR="$ROOT_DIR/.build/release"
 DIST_DIR="$ROOT_DIR/dist"
 APP_BUNDLE="$DIST_DIR/$APP_NAME.app"
+RESOURCE_BUNDLE="${APP_NAME}_${APP_NAME}.bundle"
 
 VERSION=$(grep -oE '"[0-9]+\.[0-9]+\.[0-9]+"' "$ROOT_DIR/Sources/PingSentry/Version.swift" | tr -d '"')
 
@@ -14,8 +15,14 @@ echo "Building $APP_NAME $VERSION (release)..."
 swift build -c release --package-path "$ROOT_DIR"
 
 rm -rf "$APP_BUNDLE"
-mkdir -p "$APP_BUNDLE/Contents/MacOS"
+mkdir -p "$APP_BUNDLE/Contents/MacOS" "$APP_BUNDLE/Contents/Resources"
 cp "$BUILD_DIR/$APP_NAME" "$APP_BUNDLE/Contents/MacOS/$APP_NAME"
+
+if [ -d "$BUILD_DIR/$RESOURCE_BUNDLE" ]; then
+    cp -R "$BUILD_DIR/$RESOURCE_BUNDLE" "$APP_BUNDLE/Contents/Resources/"
+else
+    echo "Warning: resource bundle $RESOURCE_BUNDLE not found — localized strings will be missing."
+fi
 
 cat > "$APP_BUNDLE/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,9 +57,9 @@ codesign --force --deep --sign - "$APP_BUNDLE"
 
 echo "Built: $APP_BUNDLE"
 echo
-echo "Avvio automatico al login e notifiche funzionano solo su un'app impacchettata con bundle ID"
-echo "(swift run non basta). Per un test affidabile, copiala in /Applications:"
+echo "Login item and notifications only work from a bundled app with a bundle ID"
+echo "(swift run alone is not enough). For a reliable test, copy it into /Applications:"
 echo "  cp -R \"$APP_BUNDLE\" /Applications/"
 echo
-echo "Essendo firmata ad-hoc (non notarizzata), al primo avvio da /Applications macOS potrebbe"
-echo "avvisare che l'app non è verificata: click destro > Apri per confermare una volta sola."
+echo "Since it's ad-hoc signed (not notarized), macOS may warn on first launch from"
+echo "/Applications that the app is unverified: right-click > Open once to confirm."
