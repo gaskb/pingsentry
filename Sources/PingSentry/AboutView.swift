@@ -24,24 +24,21 @@ struct AboutView: View {
             Link(L("about.repository"), destination: URL(string: "https://github.com/gaskb/pingsentry")!)
                 .font(.callout)
 
-            VStack(spacing: 4) {
-                Text(L("about.support_text"))
-                    .multilineTextAlignment(.center)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: 260)
-
-                Link(destination: URL(string: "https://ko-fi.com/gaskb")!) {
-                    Text("☕ " + L("about.support_link"))
-                }
-                .font(.callout)
-            }
+            Text(supportText)
+                .multilineTextAlignment(.center)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: 260)
 
             Text("Powered by GasKB")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
         .padding(28)
-        .frame(width: 320, height: 380)
+        .frame(width: 320, height: 360)
+    }
+
+    private var supportText: AttributedString {
+        (try? AttributedString(markdown: L("about.support_text"))) ?? AttributedString(L("about.support_text"))
     }
 }

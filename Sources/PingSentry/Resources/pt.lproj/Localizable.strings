@@ -32,8 +32,7 @@
 "about.description" = "Monitor de rede na barra de menus: ping periódico a um host à sua escolha, com indicador de qualidade e percentagem de pacotes perdidos.";
 "about.repository" = "Repositório no GitHub";
 
-"about.support_text" = "O PingSentry é gratuito — se gostar, sinta-se à vontade para me pagar um café.";
-"about.support_link" = "Pagar-me um café";
+"about.support_text" = "O PingSentry é gratuito — se gostar, sinta-se à vontade para [me pagar um café ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Estatísticas";

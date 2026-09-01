@@ -32,8 +32,7 @@
 "about.description" = "Menu bar network monitor: periodic ping to a host of your choice, with a quality indicator and packet-loss percentage.";
 "about.repository" = "Repository on GitHub";
 
-"about.support_text" = "PingSentry is free — if you enjoy it, feel free to buy me a coffee.";
-"about.support_link" = "Buy me a coffee";
+"about.support_text" = "PingSentry is free — if you enjoy it, feel free to [buy me a coffee ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Stats";
