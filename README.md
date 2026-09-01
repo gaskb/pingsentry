@@ -49,6 +49,10 @@ All translations were written by an AI assistant rather than reviewed by a nativ
 
 Not yet notarized. Plan: a notarized DMG published via GitLab/GitHub Releases, which needs an Apple Developer ID account to be set up separately.
 
+## License
+
+[MIT](LICENSE) — do whatever you want with it, just keep the copyright notice.
+
 ---
 
 # PingSentry (Italiano)
@@ -99,3 +103,7 @@ Tutte le traduzioni sono state scritte da un assistente IA, non riviste da un ma
 ## Distribuzione
 
 Non ancora notarizzata. Piano: una DMG notarizzata pubblicata via GitLab/GitHub Releases, che richiede un account Apple Developer ID da configurare a parte.
+
+## Licenza
+
+[MIT](LICENSE) — fanne quello che vuoi, basta mantenere la nota di copyright.
