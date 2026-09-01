@@ -8,6 +8,12 @@ Built to replace a ~10-year-old third-party menu bar widget that macOS was about
 
 PingSentry is free. If you find it useful, feel free to [buy me a coffee on Ko-fi](https://ko-fi.com/gaskb) — no obligation at all.
 
+## Download
+
+Grab the latest `.dmg` from the [Releases page](https://github.com/gaskb/pingsentry/releases), open it, and drag PingSentry into Applications.
+
+**Not notarized yet:** since this isn't signed with a paid Apple Developer ID, macOS will flag it as being from an unidentified developer on first launch. To open it: right-click (or Control-click) PingSentry.app in Applications → **Open** → confirm in the dialog. You only need to do this once.
+
 ## How it works
 
 - Swift + SwiftUI, using `MenuBarExtra` (macOS 14+).
@@ -62,6 +68,12 @@ App per la barra menu di macOS che esegue un ping periodico verso un host a scel
 Nata per sostituire un vecchio widget di terze parti (~10 anni) che macOS stava per smettere di far funzionare.
 
 PingSentry è gratis. Se ti torna utile, sentiti libero di [offrirmi un caffè su Ko-fi](https://ko-fi.com/gaskb) — nessun obbligo.
+
+## Download
+
+Scarica l'ultima `.dmg` dalla [pagina Releases](https://github.com/gaskb/pingsentry/releases), aprila e trascina PingSentry nella cartella Applicazioni.
+
+**Non ancora notarizzata:** non essendo firmata con un account Apple Developer ID a pagamento, al primo avvio macOS la segnala come proveniente da uno sviluppatore non identificato. Per aprirla: tasto destro (o Control-clic) su PingSentry.app in Applicazioni → **Apri** → conferma nella finestra di dialogo. Serve una volta sola.
 
 ## Come funziona
 
