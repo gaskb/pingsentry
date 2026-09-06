@@ -6,8 +6,6 @@ A macOS menu bar app that periodically pings a host of your choice and shows the
 
 Built to replace a ~10-year-old third-party menu bar widget that macOS was about to stop running.
 
-PingSentry is free. If you find it useful, feel free to [buy me a coffee on Ko-fi](https://ko-fi.com/gaskb) — no obligation at all.
-
 ## Download
 
 Grab the latest `.dmg` from the [Releases page](https://github.com/gaskb/pingsentry/releases), open it, and drag PingSentry into Applications.
@@ -59,6 +57,8 @@ Not yet notarized. Plan: a notarized DMG published via GitLab/GitHub Releases, w
 
 [MIT](LICENSE) — do whatever you want with it, just keep the copyright notice.
 
+PingSentry is free. If you find it useful, feel free to [buy me a coffee on Ko-fi](https://ko-fi.com/gaskb) — no obligation at all.
+
 ---
 
 # PingSentry (Italiano)
@@ -66,8 +66,6 @@ Not yet notarized. Plan: a notarized DMG published via GitLab/GitHub Releases, w
 App per la barra menu di macOS che esegue un ping periodico verso un host a scelta e ne mostra il risultato accanto all'orologio: un'icona a barre stile segnale wifi più latenza e percentuale di pacchetti persi (es. `▂▄▆█ 9ms (0%)`).
 
 Nata per sostituire un vecchio widget di terze parti (~10 anni) che macOS stava per smettere di far funzionare.
-
-PingSentry è gratis. Se ti torna utile, sentiti libero di [offrirmi un caffè su Ko-fi](https://ko-fi.com/gaskb) — nessun obbligo.
 
 ## Download
 
@@ -119,3 +117,5 @@ Non ancora notarizzata. Piano: una DMG notarizzata pubblicata via GitLab/GitHub 
 ## Licenza
 
 [MIT](LICENSE) — fanne quello che vuoi, basta mantenere la nota di copyright.
+
+PingSentry è gratis. Se ti torna utile, sentiti libero di [offrirmi un caffè su Ko-fi](https://ko-fi.com/gaskb) — nessun obbligo.
