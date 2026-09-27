@@ -20,6 +20,8 @@
 "settings.show_loss" = "Pourcentage de perte de paquets";
 "settings.section.notifications" = "Notifications";
 "settings.notify_toggle" = "Avertir quand l'hôte cesse de répondre ou redevient joignable";
+"settings.notifications_denied_warning" = "Les notifications sont désactivées dans les Réglages Système.";
+"settings.open_system_settings" = "Ouvrir les Réglages Système";
 "settings.section.startup" = "Démarrage";
 "settings.launch_at_login" = "Lancer PingSentry à la connexion";
 "settings.login_item_error_format" = "Indisponible : %@";

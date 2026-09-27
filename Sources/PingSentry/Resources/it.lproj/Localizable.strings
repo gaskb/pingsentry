@@ -20,6 +20,8 @@
 "settings.show_loss" = "Percentuale pacchetti persi";
 "settings.section.notifications" = "Notifiche";
 "settings.notify_toggle" = "Avvisa quando l'host non risponde o torna su";
+"settings.notifications_denied_warning" = "Le notifiche sono disabilitate nelle Impostazioni di Sistema.";
+"settings.open_system_settings" = "Apri Impostazioni di Sistema";
 "settings.section.startup" = "Avvio";
 "settings.launch_at_login" = "Avvia PingSentry al login";
 "settings.login_item_error_format" = "Non disponibile: %@";

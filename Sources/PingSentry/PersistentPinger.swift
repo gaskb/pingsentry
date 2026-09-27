@@ -6,6 +6,8 @@ final class PersistentPinger {
 
     private var process: Process?
     private var outputHandle: FileHandle?
+    private var errorHandle: FileHandle?
+    private(set) var lastErrorMessage: String?
     private var buffer = ""
     private var lastSeq: Int?
     private var host = ""
@@ -17,14 +19,16 @@ final class PersistentPinger {
         self.intervalSeconds = intervalSeconds
         lastSeq = nil
         buffer = ""
+        lastErrorMessage = nil
 
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/sbin/ping")
         process.arguments = ["-i", String(format: "%.1f", max(intervalSeconds, 1)), host]
 
         let pipe = Pipe()
+        let errorPipe = Pipe()
         process.standardOutput = pipe
-        process.standardError = Pipe()
+        process.standardError = errorPipe
 
         process.terminationHandler = { [weak self] _ in
             Task { @MainActor [weak self] in
@@ -40,10 +44,21 @@ final class PersistentPinger {
             }
         }
 
+        errorPipe.fileHandleForReading.readabilityHandler = { [weak self] handle in
+            let data = handle.availableData
+            guard !data.isEmpty,
+                  let text = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  !text.isEmpty else { return }
+            Task { @MainActor [weak self] in
+                self?.lastErrorMessage = text
+            }
+        }
+
         do {
             try process.run()
             self.process = process
             self.outputHandle = pipe.fileHandleForReading
+            self.errorHandle = errorPipe.fileHandleForReading
         } catch {
             onResult?(PingResult(timestamp: Date(), success: false, latencyMs: nil))
         }
@@ -52,6 +67,8 @@ final class PersistentPinger {
     func stop() {
         outputHandle?.readabilityHandler = nil
         outputHandle = nil
+        errorHandle?.readabilityHandler = nil
+        errorHandle = nil
         if let process, process.isRunning {
             process.terminationHandler = nil
             process.terminate()

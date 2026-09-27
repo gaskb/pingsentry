@@ -5,6 +5,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         monitor?.stop()
+        LifetimeStatsStore.shared.flush()
     }
 }
 
@@ -32,7 +33,12 @@ struct PingSentryApp: App {
             MenuContentView(monitor: monitor)
         } label: {
             MenuBarLabel(monitor: monitor)
-                .task { monitor.start() }
+                .task {
+                    if monitor.notifyOnStateChange {
+                        NotificationManager.requestAuthorizationIfNeeded()
+                    }
+                    monitor.start()
+                }
         }
         .menuBarExtraStyle(.menu)
 

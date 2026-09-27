@@ -1,3 +1,4 @@
+import AppKit
 import UserNotifications
 
 enum NotificationManager {
@@ -10,6 +11,18 @@ enum NotificationManager {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
     }
 
+    static func checkAuthorizationStatus() async -> UNAuthorizationStatus {
+        guard isBundled else { return .authorized }
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        return settings.authorizationStatus
+    }
+
+    static func openSystemNotificationSettings() {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.notifications") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
     static func send(title: String, body: String) {
         guard isBundled else { return }
         let content = UNMutableNotificationContent()
@@ -20,3 +33,4 @@ enum NotificationManager {
         UNUserNotificationCenter.current().add(request)
     }
 }
+

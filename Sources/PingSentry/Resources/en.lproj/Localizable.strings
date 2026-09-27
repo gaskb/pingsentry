@@ -20,6 +20,8 @@
 "settings.show_loss" = "Packet loss percentage";
 "settings.section.notifications" = "Notifications";
 "settings.notify_toggle" = "Notify when the host stops responding or comes back";
+"settings.notifications_denied_warning" = "Notifications are disabled in macOS System Settings.";
+"settings.open_system_settings" = "Open System Settings";
 "settings.section.startup" = "Startup";
 "settings.launch_at_login" = "Launch PingSentry at login";
 "settings.login_item_error_format" = "Not available: %@";

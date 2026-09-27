@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 struct SettingsView: View {
     @ObservedObject var monitor: PingMonitor
@@ -15,6 +16,7 @@ struct SettingsView: View {
     @State private var hostDraft: String = ""
     @State private var launchAtLoginEnabled = false
     @State private var loginItemError: String?
+    @State private var notificationAuthStatus: UNAuthorizationStatus = .authorized
 
     var body: some View {
         Form {
@@ -40,8 +42,24 @@ struct SettingsView: View {
                         monitor.notifyOnStateChange = newValue
                         if newValue {
                             NotificationManager.requestAuthorizationIfNeeded()
+                            Task {
+                                await refreshNotificationAuth()
+                            }
                         }
                     }
+
+                if notifyOnStateChange && notificationAuthStatus == .denied {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(L("settings.notifications_denied_warning"))
+                            .font(.caption)
+                            .foregroundStyle(.orange)
+                        Button(L("settings.open_system_settings")) {
+                            NotificationManager.openSystemNotificationSettings()
+                        }
+                        .buttonStyle(.link)
+                        .font(.caption)
+                    }
+                }
             }
 
             Section(L("settings.section.startup")) {
@@ -78,6 +96,14 @@ struct SettingsView: View {
             hostDraft = host
             launchAtLoginEnabled = LoginItemManager.isEnabled
         }
+        .task {
+            await refreshNotificationAuth()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            Task {
+                await refreshNotificationAuth()
+            }
+        }
         .onChange(of: intervalSeconds) { _, newValue in
             monitor.intervalSeconds = newValue
             monitor.restart()
@@ -85,6 +111,10 @@ struct SettingsView: View {
         .onChange(of: windowSize) { _, newValue in
             monitor.windowSize = newValue
         }
+    }
+
+    private func refreshNotificationAuth() async {
+        notificationAuthStatus = await NotificationManager.checkAuthorizationStatus()
     }
 
     private func applyHost() {

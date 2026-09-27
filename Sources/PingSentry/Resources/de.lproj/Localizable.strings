@@ -20,6 +20,8 @@
 "settings.show_loss" = "Paketverlust in Prozent";
 "settings.section.notifications" = "Benachrichtigungen";
 "settings.notify_toggle" = "Benachrichtigen, wenn der Host nicht mehr oder wieder antwortet";
+"settings.notifications_denied_warning" = "Mitteilungen sind in den macOS-Systemeinstellungen deaktiviert.";
+"settings.open_system_settings" = "Systemeinstellungen öffnen";
 "settings.section.startup" = "Start";
 "settings.launch_at_login" = "PingSentry bei der Anmeldung starten";
 "settings.login_item_error_format" = "Nicht verfügbar: %@";

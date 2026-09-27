@@ -20,6 +20,8 @@
 "settings.show_loss" = "丢包百分比";
 "settings.section.notifications" = "通知";
 "settings.notify_toggle" = "主机无响应或恢复时通知我";
+"settings.notifications_denied_warning" = "通知已在 macOS 系统设置中被禁用。";
+"settings.open_system_settings" = "打开系统设置";
 "settings.section.startup" = "启动";
 "settings.launch_at_login" = "登录时启动 PingSentry";
 "settings.login_item_error_format" = "不可用：%@";

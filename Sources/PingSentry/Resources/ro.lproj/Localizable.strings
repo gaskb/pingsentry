@@ -20,6 +20,8 @@
 "settings.show_loss" = "Procent de pachete pierdute";
 "settings.section.notifications" = "Notificări";
 "settings.notify_toggle" = "Anunță când host-ul nu mai răspunde sau revine online";
+"settings.notifications_denied_warning" = "Notificările sunt dezactivate în Configurări de sistem.";
+"settings.open_system_settings" = "Deschide Configurări de sistem";
 "settings.section.startup" = "Pornire";
 "settings.launch_at_login" = "Pornește PingSentry la conectare";
 "settings.login_item_error_format" = "Indisponibil: %@";

@@ -42,6 +42,7 @@ final class PingMonitor: ObservableObject {
 
     func changeHost(to newHost: String) {
         guard newHost != host else { return }
+        LifetimeStatsStore.flush()
         host = newHost
         sessionStats = PingStats()
         lifetimeStats = LifetimeStatsStore.load(for: newHost)
@@ -59,6 +60,7 @@ final class PingMonitor: ObservableObject {
 
     func stop() {
         pinger.stop()
+        LifetimeStatsStore.flush()
     }
 
     func restart() {

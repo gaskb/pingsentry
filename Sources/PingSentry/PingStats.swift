@@ -33,25 +33,69 @@ struct PingStats: Codable {
     }
 }
 
-enum LifetimeStatsStore {
+@MainActor
+final class LifetimeStatsStore {
+    static let shared = LifetimeStatsStore()
     private static let key = "lifetimeStatsByHost"
 
+    private var cache: [String: PingStats]?
+    private var isDirty = false
+    private var flushTimer: Timer?
+
+    private init() {}
+
     static func load(for host: String) -> PingStats {
-        allStats()[host] ?? PingStats()
+        shared.load(for: host)
     }
 
     static func save(_ stats: PingStats, for host: String) {
-        var dict = allStats()
-        dict[host] = stats
-        guard let encoded = try? JSONEncoder().encode(dict) else { return }
-        UserDefaults.standard.set(encoded, forKey: key)
+        shared.save(stats, for: host)
     }
 
-    private static func allStats() -> [String: PingStats] {
-        guard let data = UserDefaults.standard.data(forKey: key),
-              let decoded = try? JSONDecoder().decode([String: PingStats].self, from: data) else {
-            return [:]
+    static func flush() {
+        shared.flush()
+    }
+
+    func load(for host: String) -> PingStats {
+        loadCacheIfNeeded()
+        return cache?[host] ?? PingStats()
+    }
+
+    func save(_ stats: PingStats, for host: String) {
+        loadCacheIfNeeded()
+        cache?[host] = stats
+        isDirty = true
+        scheduleDebouncedFlush()
+    }
+
+    func flush() {
+        guard isDirty, let cache else { return }
+        flushTimer?.invalidate()
+        flushTimer = nil
+        if let encoded = try? JSONEncoder().encode(cache) {
+            UserDefaults.standard.set(encoded, forKey: Self.key)
         }
-        return decoded
+        isDirty = false
+    }
+
+    private func loadCacheIfNeeded() {
+        guard cache == nil else { return }
+        if let data = UserDefaults.standard.data(forKey: Self.key),
+           let decoded = try? JSONDecoder().decode([String: PingStats].self, from: data) {
+            cache = decoded
+        } else {
+            cache = [:]
+        }
+    }
+
+    private func scheduleDebouncedFlush(interval: TimeInterval = 30.0) {
+        guard flushTimer == nil else { return }
+        let timer = Timer(timeInterval: interval, repeats: false) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.flush()
+            }
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        flushTimer = timer
     }
 }
