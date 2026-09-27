@@ -23,9 +23,9 @@ Documento generato il **2026-09-27**, basato sulle risultanze di `review.md` (co
 | **PS-01** | Fix richiesta permessi notifiche al primo avvio & stato denied | `review.md` (Punto 1) | **P0** | **2** | ~1h | MS1 (Quick Fixes) | ✅ Completato |
 | **PS-02** | Consumo/Drain di `stderr` per evitare freeze da buffer kernel | Proposta tecnica | **P0** | **1** | ~30m | MS1 (Quick Fixes) | ✅ Completato |
 | **PS-03** | In-memory cache & debouncing scritture I/O statistiche permanenti | `review.md` (Punto 3) | **P0** | **3** | ~2h | MS1 (Quick Fixes) | ✅ Completato |
-| **PS-04** | Disaccoppiamento `PingOutputParser` puro e target `Tests` SPM | `review.md` (Punto 2) | **P1** | **5** | ~3-4h | MS2 (Reliability) | Da fare |
-| **PS-05** | Isolamento sessioni asincrone su `restart()` tramite `sessionId` | `review.md` (Sec. 1) | **P1** | **2** | ~1h | MS2 (Reliability) | Da fare |
-| **PS-06** | Gestione eventi Sleep & Wake di macOS (prevenzione falsi down) | Proposta tecnica | **P1** | **2** | ~1-2h | MS2 (Reliability) | Da fare |
+| **PS-04** | Disaccoppiamento `PingOutputParser` puro e target `Tests` SPM | `review.md` (Punto 2) | **P1** | **5** | ~3-4h | MS2 (Reliability) | ✅ Completato |
+| **PS-05** | Isolamento sessioni asincrone su `restart()` tramite `sessionId` | `review.md` (Sec. 1) | **P1** | **2** | ~1h | MS2 (Reliability) | ✅ Completato |
+| **PS-06** | Gestione eventi Sleep & Wake di macOS (prevenzione falsi down) | Proposta tecnica | **P1** | **2** | ~1-2h | MS2 (Reliability) | ✅ Completato |
 | **PS-07** | Macchina a stati monitor (`PingState`), retry backoff & loop limit | `review.md` (Punto 4) | **P1** | **3** | ~2-3h | MS3 (Validation) | Da fare |
 | **PS-08** | Validazione host e gestione dual-binary `/sbin/ping` vs `ping6` | `review.md` (Punto 5) | **P1** | **3** | ~2h | MS3 (Validation) | Da fare |
 | **PS-09** | Azione di reset statistiche (Sessione & Lifetime) in `StatsView` | Proposta tecnica | **P2** | **2** | ~1h | MS3 (Validation) | Da fare |

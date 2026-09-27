@@ -12,6 +12,10 @@ let package = Package(
             name: "PingSentry",
             resources: [.process("Resources")]
         ),
+        .testTarget(
+            name: "PingSentryTests",
+            dependencies: ["PingSentry"]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )

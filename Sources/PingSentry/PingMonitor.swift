@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 
 struct PingResult: Identifiable, Sendable {
@@ -33,11 +34,17 @@ final class PingMonitor: ObservableObject {
     private var consecutiveFailures = 0
     private var hasNotifiedDown = false
 
+    private var sleepToken: NotificationToken?
+    private var wakeToken: NotificationToken?
+    private var isSystemSleeping = false
+    private var wasRunningBeforeSleep = false
+
     init(host: String, intervalSeconds: Double, windowSize: Int) {
         self.host = host
         self.intervalSeconds = intervalSeconds
         self.windowSize = windowSize
         self.lifetimeStats = LifetimeStatsStore.load(for: host)
+        setupSleepWakeObservers()
     }
 
     func changeHost(to newHost: String) {
@@ -130,5 +137,65 @@ final class PingMonitor: ObservableObject {
                 }
             }
         }
+    }
+
+    private func setupSleepWakeObservers() {
+        let center = NSWorkspace.shared.notificationCenter
+        let sleep = center.addObserver(
+            forName: NSWorkspace.willSleepNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.handleSystemWillSleep()
+            }
+        }
+        sleepToken = NotificationToken(token: sleep, center: center)
+
+        let wake = center.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.handleSystemDidWake()
+            }
+        }
+        wakeToken = NotificationToken(token: wake, center: center)
+    }
+
+    private func handleSystemWillSleep() {
+        isSystemSleeping = true
+        wasRunningBeforeSleep = true
+        consecutiveFailures = 0
+        pinger.stop()
+        LifetimeStatsStore.flush()
+    }
+
+    private func handleSystemDidWake() {
+        guard isSystemSleeping else { return }
+        isSystemSleeping = false
+        consecutiveFailures = 0
+        guard wasRunningBeforeSleep else { return }
+
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 2_500_000_000)
+            guard let self, !self.isSystemSleeping else { return }
+            self.start()
+        }
+    }
+}
+
+private final class NotificationToken: @unchecked Sendable {
+    private let token: any NSObjectProtocol
+    private let center: NotificationCenter
+
+    init(token: any NSObjectProtocol, center: NotificationCenter) {
+        self.token = token
+        self.center = center
+    }
+
+    deinit {
+        center.removeObserver(token)
     }
 }

@@ -23,6 +23,7 @@ Grab the latest `.dmg` from the [Releases page](https://github.com/gaskb/pingsen
 ```bash
 swift build
 swift run
+./Scripts/test.sh   # Run automated test suite
 ```
 
 `swift run` launches the app as a plain process (you'll also see a Dock icon, which the packaged `.app` hides via `LSUIElement`). Login item and notifications only work from a packaged `.app` with a bundle identifier — `swift run` alone can't exercise those two features.
@@ -36,12 +37,14 @@ To build a distributable `.app` bundle (ad-hoc signed, not notarized):
 ## Project layout
 
 - `Sources/PingSentry/PingSentryApp.swift` — app entry point, menu bar label, window scenes.
-- `Sources/PingSentry/PersistentPinger.swift` — the long-lived ping process and its output parser.
-- `Sources/PingSentry/PingMonitor.swift` — ping loop orchestration, rolling packet-loss window, notifications.
-- `Sources/PingSentry/PingStats.swift` — session/lifetime counters.
+- `Sources/PingSentry/PersistentPinger.swift` — long-lived ping process runner and session manager.
+- `Sources/PingSentry/PingOutputParser.swift` — pure parser for ping output and packet loss gap detection.
+- `Sources/PingSentry/PingMonitor.swift` — ping loop orchestration, rolling packet-loss window, sleep/wake handling, notifications.
+- `Sources/PingSentry/PingStats.swift` — session and in-memory debounced lifetime counters.
 - `Sources/PingSentry/Localization.swift` — in-app language override (independent of the macOS system language).
 - `Sources/PingSentry/Resources/*.lproj/` — translated strings.
 - `Sources/PingSentry/MenuContentView.swift`, `SettingsView.swift`, `AboutView.swift`, `StatsView.swift` — UI.
+- `Tests/PingSentryTests/` — automated unit tests covering parser, statistics, and quality indicators.
 
 ## Localization
 
@@ -84,6 +87,7 @@ Scarica l'ultima `.dmg` dalla [pagina Releases](https://github.com/gaskb/pingsen
 ```bash
 swift build
 swift run
+./Scripts/test.sh   # Esecuzione suite di test automatici
 ```
 
 `swift run` avvia l'app come processo semplice (comparirà anche un'icona nel Dock, assente invece nel bundle `.app` grazie a `LSUIElement`). Avvio automatico al login e notifiche funzionano solo con un `.app` pacchettizzato con un bundle identifier — `swift run` da solo non basta per queste due funzionalità.
@@ -97,12 +101,14 @@ Per costruire un bundle `.app` distribuibile (firmato ad-hoc, non notarizzato):
 ## Struttura del progetto
 
 - `Sources/PingSentry/PingSentryApp.swift` — entry point, etichetta in barra, finestre.
-- `Sources/PingSentry/PersistentPinger.swift` — il processo ping persistente e il suo parser.
-- `Sources/PingSentry/PingMonitor.swift` — orchestrazione del ciclo di ping, finestra di calcolo della perdita, notifiche.
-- `Sources/PingSentry/PingStats.swift` — contatori di sessione/lifetime.
+- `Sources/PingSentry/PersistentPinger.swift` — runner del processo ping persistente e gestione delle sessioni.
+- `Sources/PingSentry/PingOutputParser.swift` — parser puro per l'output di ping e rilevamento perdita pacchetti.
+- `Sources/PingSentry/PingMonitor.swift` — orchestrazione del ciclo di ping, finestra di calcolo della perdita, gestione sleep/wake, notifiche.
+- `Sources/PingSentry/PingStats.swift` — contatori di sessione e lifetime con cache in memoria e debouncing.
 - `Sources/PingSentry/Localization.swift` — override della lingua a livello di app (indipendente dalla lingua di sistema di macOS).
 - `Sources/PingSentry/Resources/*.lproj/` — stringhe tradotte.
 - `Sources/PingSentry/MenuContentView.swift`, `SettingsView.swift`, `AboutView.swift`, `StatsView.swift` — interfaccia.
+- `Tests/PingSentryTests/` — test unitari automatici su parser, statistiche e indicatori di qualità segnale.
 
 ## Localizzazione
 

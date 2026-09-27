@@ -8,17 +8,18 @@ final class PersistentPinger {
     private var outputHandle: FileHandle?
     private var errorHandle: FileHandle?
     private(set) var lastErrorMessage: String?
-    private var buffer = ""
-    private var lastSeq: Int?
+    private var parser = PingOutputParser()
+    private var currentSessionId = UUID()
     private var host = ""
     private var intervalSeconds: Double = 2
 
     func start(host: String, intervalSeconds: Double) {
         stop()
+        let sessionId = UUID()
+        self.currentSessionId = sessionId
         self.host = host
         self.intervalSeconds = intervalSeconds
-        lastSeq = nil
-        buffer = ""
+        parser.reset()
         lastErrorMessage = nil
 
         let process = Process()
@@ -32,7 +33,8 @@ final class PersistentPinger {
 
         process.terminationHandler = { [weak self] _ in
             Task { @MainActor [weak self] in
-                self?.handleUnexpectedTermination()
+                guard let self, self.currentSessionId == sessionId else { return }
+                self.handleUnexpectedTermination(forSession: sessionId)
             }
         }
 
@@ -40,7 +42,8 @@ final class PersistentPinger {
             let data = handle.availableData
             guard !data.isEmpty, let chunk = String(data: data, encoding: .utf8) else { return }
             Task { @MainActor [weak self] in
-                self?.consume(chunk)
+                guard let self, self.currentSessionId == sessionId else { return }
+                self.consume(chunk)
             }
         }
 
@@ -50,7 +53,8 @@ final class PersistentPinger {
                   let text = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
                   !text.isEmpty else { return }
             Task { @MainActor [weak self] in
-                self?.lastErrorMessage = text
+                guard let self, self.currentSessionId == sessionId else { return }
+                self.lastErrorMessage = text
             }
         }
 
@@ -65,6 +69,7 @@ final class PersistentPinger {
     }
 
     func stop() {
+        currentSessionId = UUID()
         outputHandle?.readabilityHandler = nil
         outputHandle = nil
         errorHandle?.readabilityHandler = nil
@@ -76,52 +81,22 @@ final class PersistentPinger {
         process = nil
     }
 
-    private func handleUnexpectedTermination() {
-        guard process != nil else { return }
+    private func handleUnexpectedTermination(forSession sessionId: UUID) {
+        guard process != nil, currentSessionId == sessionId else { return }
         process = nil
         let hostToRestart = host
         let intervalToRestart = intervalSeconds
         Task { @MainActor [weak self] in
             try? await Task.sleep(nanoseconds: 2_000_000_000)
-            self?.start(host: hostToRestart, intervalSeconds: intervalToRestart)
+            guard let self, self.currentSessionId == sessionId else { return }
+            self.start(host: hostToRestart, intervalSeconds: intervalToRestart)
         }
     }
 
     private func consume(_ chunk: String) {
-        buffer += chunk
-        while let range = buffer.range(of: "\n") {
-            let line = String(buffer[..<range.lowerBound])
-            buffer.removeSubrange(..<range.upperBound)
-            handle(line: line)
+        let results = parser.consume(chunk: chunk)
+        for result in results {
+            onResult?(result)
         }
-    }
-
-    private func handle(line: String) {
-        guard let seq = Self.parseSeq(from: line) else { return }
-        let latency = Self.parseLatency(from: line)
-
-        if let lastSeq, seq > lastSeq + 1 {
-            let missingCount = min(seq - lastSeq - 1, 50)
-            for _ in 0..<missingCount {
-                onResult?(PingResult(timestamp: Date(), success: false, latencyMs: nil))
-            }
-        }
-        lastSeq = seq
-
-        onResult?(PingResult(timestamp: Date(), success: latency != nil, latencyMs: latency))
-    }
-
-    nonisolated private static func parseSeq(from line: String) -> Int? {
-        guard let range = line.range(of: "icmp_seq=") else { return nil }
-        let after = line[range.upperBound...]
-        let digits = after.prefix { $0.isNumber }
-        return Int(digits)
-    }
-
-    nonisolated private static func parseLatency(from line: String) -> Double? {
-        guard let range = line.range(of: "time=") else { return nil }
-        let after = line[range.upperBound...]
-        let numberPart = after.prefix { $0.isNumber || $0 == "." }
-        return Double(numberPart)
     }
 }
