@@ -7,13 +7,21 @@
 "menu.last_ping" = "Último ping";
 "menu.timeout" = "Tiempo agotado";
 "menu.packet_loss_format" = "Pérdida de paquetes: %d%% (últimos %d)";
+"menu.retry_now" = "Reintentar ahora";
+
+/* Monitor States */
+"state.running" = "En ejecución";
+"state.retrying" = "Reintentando";
+"state.failed" = "Error de conexión";
 
 /* Settings */
 "settings.section.connection" = "Conexión";
 "settings.host_placeholder" = "Host o IP";
 "settings.apply" = "Aplicar";
-"settings.interval_format" = "Intervalo entre pings: %d s";
-"settings.window_format" = "Ventana de cálculo de pérdida: %d pings";
+"settings.host_invalid" = "Nombre de host o dirección IP no válida";
+"settings.host_empty" = "El host no puede estar vacío";
+"settings.interval_format" = "Intervalo de ping: %d s";
+"settings.window_format" = "Ventana de pérdida de paquetes: %d pings";
 "settings.section.display" = "Qué mostrar en la barra de menús";
 "settings.show_bars" = "Icono de barras";
 "settings.show_latency" = "Latencia (ms)";
@@ -31,21 +39,25 @@
 /* About */
 "about.window_title" = "Acerca de PingSentry";
 "about.version_format" = "Versión %@";
-"about.description" = "Monitor de red en la barra de menús: ping periódico a un host de tu elección, con indicador de calidad y porcentaje de paquetes perdidos.";
+"about.description" = "Monitor de red para la barra de menús: ping periódico a un host a su elección, con indicador de calidad y porcentaje de paquetes perdidos.";
 "about.repository" = "Repositorio en GitHub";
-
-"about.support_text" = "PingSentry es gratis — si te gusta, siéntete libre de [invitarme a un café ☕](https://ko-fi.com/gaskb).";
+"about.support_text" = "PingSentry es gratuito — si te gusta, siéntete libre de [invitarme a un café ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Estadísticas";
 "stats.current_session" = "Sesión actual";
-"stats.lifetime" = "Histórico (para este host)";
+"stats.lifetime" = "Historial (este host)";
 "stats.total" = "Pings totales";
-"stats.successful" = "Con respuesta";
-"stats.failed" = "Sin respuesta";
-"stats.average" = "Media";
+"stats.successful" = "Exitosos";
+"stats.failed" = "Fallidos";
+"stats.average" = "Promedio";
 "stats.fastest" = "Más rápido";
 "stats.slowest" = "Más lento";
+"stats.reset_session" = "Restablecer sesión";
+"stats.reset_lifetime" = "Restablecer historial";
+"stats.reset_lifetime_confirm" = "¿Restablecer todas las estadísticas guardadas para este host?";
+"stats.reset" = "Restablecer";
+"stats.cancel" = "Cancelar";
 
 /* Notifications */
 "notification.host_down_format" = "%@ no responde (%d pings fallidos consecutivos)";

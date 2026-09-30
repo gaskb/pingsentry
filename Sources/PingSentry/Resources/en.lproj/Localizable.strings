@@ -7,11 +7,19 @@
 "menu.last_ping" = "Last ping";
 "menu.timeout" = "Timeout";
 "menu.packet_loss_format" = "Packet loss: %d%% (last %d)";
+"menu.retry_now" = "Retry now";
+
+/* Monitor States */
+"state.running" = "Running";
+"state.retrying" = "Retrying";
+"state.failed" = "Connection error";
 
 /* Settings */
 "settings.section.connection" = "Connection";
 "settings.host_placeholder" = "Host or IP";
 "settings.apply" = "Apply";
+"settings.host_invalid" = "Invalid hostname or IP address";
+"settings.host_empty" = "Host cannot be empty";
 "settings.interval_format" = "Ping interval: %d s";
 "settings.window_format" = "Packet-loss window: %d pings";
 "settings.section.display" = "What to show in the menu bar";
@@ -33,7 +41,6 @@
 "about.version_format" = "Version %@";
 "about.description" = "Menu bar network monitor: periodic ping to a host of your choice, with a quality indicator and packet-loss percentage.";
 "about.repository" = "Repository on GitHub";
-
 "about.support_text" = "PingSentry is free — if you enjoy it, feel free to [buy me a coffee ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
@@ -46,6 +53,11 @@
 "stats.average" = "Average";
 "stats.fastest" = "Fastest";
 "stats.slowest" = "Slowest";
+"stats.reset_session" = "Reset Session";
+"stats.reset_lifetime" = "Reset Lifetime";
+"stats.reset_lifetime_confirm" = "Reset all saved lifetime stats for this host?";
+"stats.reset" = "Reset";
+"stats.cancel" = "Cancel";
 
 /* Notifications */
 "notification.host_down_format" = "%@ is not responding (%d consecutive failed pings)";

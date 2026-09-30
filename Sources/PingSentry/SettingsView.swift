@@ -14,6 +14,7 @@ struct SettingsView: View {
     @AppStorage(Localization.appLanguageDefaultsKey) private var appLanguage: String = AppLanguage.system.rawValue
 
     @State private var hostDraft: String = ""
+    @State private var hostValidationError: String?
     @State private var launchAtLoginEnabled = false
     @State private var loginItemError: String?
     @State private var notificationAuthStatus: UNAuthorizationStatus = .authorized
@@ -25,6 +26,11 @@ struct SettingsView: View {
                     TextField(L("settings.host_placeholder"), text: $hostDraft)
                         .onSubmit(applyHost)
                     Button(L("settings.apply"), action: applyHost)
+                }
+                if let hostValidationError {
+                    Text(hostValidationError)
+                        .font(.caption)
+                        .foregroundStyle(.red)
                 }
                 Stepper(L("settings.interval_format", Int(intervalSeconds)), value: $intervalSeconds, in: 1...60)
                 Stepper(L("settings.window_format", windowSize), value: $windowSize, in: 5...100, step: 5)
@@ -91,9 +97,10 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 420, height: 500)
+        .frame(width: 420, height: 520)
         .onAppear {
             hostDraft = host
+            hostValidationError = nil
             launchAtLoginEnabled = LoginItemManager.isEnabled
         }
         .task {
@@ -119,10 +126,12 @@ struct SettingsView: View {
 
     private func applyHost() {
         let trimmed = hostDraft.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
-            hostDraft = host
+        let validation = HostValidator.validate(trimmed)
+        guard validation.isValid else {
+            hostValidationError = L(validation.errorMessageKey ?? "settings.host_invalid")
             return
         }
+        hostValidationError = nil
         host = trimmed
         monitor.changeHost(to: trimmed)
     }

@@ -1,21 +1,29 @@
 /* Menu */
-"menu.ping_now" = "Jetzt pingen";
-"menu.stats" = "Statistik…";
+"menu.ping_now" = "Jetzt anpingen";
+"menu.stats" = "Statistiken…";
 "menu.settings" = "Einstellungen…";
 "menu.about" = "Über PingSentry";
 "menu.quit" = "Beenden";
 "menu.last_ping" = "Letzter Ping";
 "menu.timeout" = "Zeitüberschreitung";
 "menu.packet_loss_format" = "Paketverlust: %d%% (letzte %d)";
+"menu.retry_now" = "Jetzt wiederholen";
+
+/* Monitor States */
+"state.running" = "Aktiv";
+"state.retrying" = "Wiederholen";
+"state.failed" = "Verbindungsfehler";
 
 /* Settings */
 "settings.section.connection" = "Verbindung";
 "settings.host_placeholder" = "Host oder IP";
-"settings.apply" = "Übernehmen";
+"settings.apply" = "Anwenden";
+"settings.host_invalid" = "Ungültiger Hostname oder IP-Adresse";
+"settings.host_empty" = "Host darf nicht leer sein";
 "settings.interval_format" = "Ping-Intervall: %d s";
-"settings.window_format" = "Fenster für Verlustberechnung: %d Pings";
-"settings.section.display" = "Anzeige in der Menüleiste";
-"settings.show_bars" = "Balkensymbol";
+"settings.window_format" = "Paketverlust-Fenster: %d Pings";
+"settings.section.display" = "In der Menüleiste anzeigen";
+"settings.show_bars" = "Balken-Icon";
 "settings.show_latency" = "Latenz (ms)";
 "settings.show_loss" = "Paketverlust in Prozent";
 "settings.section.notifications" = "Benachrichtigungen";
@@ -31,22 +39,26 @@
 /* About */
 "about.window_title" = "Über PingSentry";
 "about.version_format" = "Version %@";
-"about.description" = "Netzwerk-Monitor für die Menüleiste: periodischer Ping an einen Host deiner Wahl, mit Qualitätsanzeige und Paketverlust in Prozent.";
+"about.description" = "Menüleisten-Netzwerkmonitor: regelmäßiges Anpingen eines gewählten Hosts mit Qualitätsindikator und Paketverlust-Prozentsatz.";
 "about.repository" = "Repository auf GitHub";
-
-"about.support_text" = "PingSentry ist kostenlos — wenn sie dir gefällt, [spendier mir gerne einen Kaffee ☕](https://ko-fi.com/gaskb).";
+"about.support_text" = "PingSentry ist kostenlos — wenn es dir gefällt, [spendier mir gerne einen Kaffee ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
-"stats.window_title" = "Statistik";
+"stats.window_title" = "Statistiken";
 "stats.current_session" = "Aktuelle Sitzung";
-"stats.lifetime" = "Gesamt (für diesen Host)";
-"stats.total" = "Pings insgesamt";
+"stats.lifetime" = "Gesamt (dieser Host)";
+"stats.total" = "Pings gesamt";
 "stats.successful" = "Erfolgreich";
 "stats.failed" = "Fehlgeschlagen";
 "stats.average" = "Durchschnitt";
 "stats.fastest" = "Schnellster";
 "stats.slowest" = "Langsamster";
+"stats.reset_session" = "Sitzung zurücksetzen";
+"stats.reset_lifetime" = "Gesamtstatistik zurücksetzen";
+"stats.reset_lifetime_confirm" = "Gesamte Statistik für diesen Host zurücksetzen?";
+"stats.reset" = "Zurücksetzen";
+"stats.cancel" = "Abbrechen";
 
 /* Notifications */
-"notification.host_down_format" = "%@ antwortet nicht (%d aufeinanderfolgende fehlgeschlagene Pings)";
+"notification.host_down_format" = "%@ antwortet nicht (%d fehlgeschlagene Pings in Folge)";
 "notification.host_up_format" = "%@ ist wieder erreichbar";

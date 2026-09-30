@@ -1,20 +1,28 @@
 /* Menu */
-"menu.ping_now" = "Ping ora";
+"menu.ping_now" = "Effettua ping";
 "menu.stats" = "Statistiche…";
 "menu.settings" = "Impostazioni…";
-"menu.about" = "Info su PingSentry";
+"menu.about" = "Informazioni su PingSentry";
 "menu.quit" = "Esci";
 "menu.last_ping" = "Ultimo ping";
-"menu.timeout" = "Timeout";
+"menu.timeout" = "Scaduto";
 "menu.packet_loss_format" = "Pacchetti persi: %d%% (ultimi %d)";
+"menu.retry_now" = "Riprova ora";
+
+/* Monitor States */
+"state.running" = "In esecuzione";
+"state.retrying" = "Nuovo tentativo";
+"state.failed" = "Errore di connessione";
 
 /* Settings */
 "settings.section.connection" = "Connessione";
 "settings.host_placeholder" = "Host o IP";
 "settings.apply" = "Applica";
-"settings.interval_format" = "Intervallo tra i ping: %d s";
-"settings.window_format" = "Finestra calcolo perdita: %d ping";
-"settings.section.display" = "Cosa mostrare in barra";
+"settings.host_invalid" = "Nome host o indirizzo IP non valido";
+"settings.host_empty" = "L'host non può essere vuoto";
+"settings.interval_format" = "Intervallo ping: %d s";
+"settings.window_format" = "Finestra pacchetti persi: %d ping";
+"settings.section.display" = "Cosa mostrare nella barra dei menu";
 "settings.show_bars" = "Icona a barre";
 "settings.show_latency" = "Latenza (ms)";
 "settings.show_loss" = "Percentuale pacchetti persi";
@@ -29,23 +37,27 @@
 "language.system" = "Lingua di sistema";
 
 /* About */
-"about.window_title" = "Info su PingSentry";
+"about.window_title" = "Informazioni su PingSentry";
 "about.version_format" = "Versione %@";
-"about.description" = "Monitor di rete da barra menu: ping periodico su un host a scelta, con indicatore di qualità e percentuale di pacchetti persi.";
+"about.description" = "Monitor di rete per la barra dei menu: effettua ping periodici a un host a scelta, con indicatore di qualità e percentuale di pacchetti persi.";
 "about.repository" = "Repository su GitHub";
-
 "about.support_text" = "PingSentry è gratis — se ti piace, sentiti libero di [offrirmi un caffè ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Statistiche";
 "stats.current_session" = "Sessione corrente";
-"stats.lifetime" = "Lifetime (per questo host)";
+"stats.lifetime" = "Storico (questo host)";
 "stats.total" = "Ping totali";
-"stats.successful" = "Con risposta";
-"stats.failed" = "Senza risposta";
+"stats.successful" = "Riusciti";
+"stats.failed" = "Falliti";
 "stats.average" = "Media";
 "stats.fastest" = "Più veloce";
 "stats.slowest" = "Più lento";
+"stats.reset_session" = "Azzera sessione";
+"stats.reset_lifetime" = "Azzera storico";
+"stats.reset_lifetime_confirm" = "Vuoi azzerare tutte le statistiche storiche per questo host?";
+"stats.reset" = "Azzera";
+"stats.cancel" = "Annulla";
 
 /* Notifications */
 "notification.host_down_format" = "%@ non risponde (%d ping falliti consecutivi)";

@@ -1,21 +1,29 @@
 /* Menu */
-"menu.ping_now" = "Ping acum";
+"menu.ping_now" = "Efectuează ping acum";
 "menu.stats" = "Statistici…";
-"menu.settings" = "Preferințe…";
+"menu.settings" = "Configurări…";
 "menu.about" = "Despre PingSentry";
 "menu.quit" = "Ieșire";
 "menu.last_ping" = "Ultimul ping";
 "menu.timeout" = "Timp expirat";
-"menu.packet_loss_format" = "Pachete pierdute: %d%% (ultimele %d)";
+"menu.packet_loss_format" = "Pierdere pachete: %d%% (ultimele %d)";
+"menu.retry_now" = "Reîncearcă acum";
+
+/* Monitor States */
+"state.running" = "În execuție";
+"state.retrying" = "Reîncercare";
+"state.failed" = "Eroare de conexiune";
 
 /* Settings */
 "settings.section.connection" = "Conexiune";
 "settings.host_placeholder" = "Host sau IP";
 "settings.apply" = "Aplică";
-"settings.interval_format" = "Interval între ping-uri: %d s";
-"settings.window_format" = "Fereastră de calcul a pierderilor: %d ping-uri";
-"settings.section.display" = "Ce se afișează în bara de meniu";
-"settings.show_bars" = "Pictogramă cu bare";
+"settings.host_invalid" = "Nume de host sau adresă IP nevalidă";
+"settings.host_empty" = "Host-ul nu poate fi gol";
+"settings.interval_format" = "Interval ping: %d s";
+"settings.window_format" = "Fereastră pierdere pachete: %d ping-uri";
+"settings.section.display" = "Afișare în bara de meniuri";
+"settings.show_bars" = "Pictogramă bare";
 "settings.show_latency" = "Latență (ms)";
 "settings.show_loss" = "Procent de pachete pierdute";
 "settings.section.notifications" = "Notificări";
@@ -31,21 +39,25 @@
 /* About */
 "about.window_title" = "Despre PingSentry";
 "about.version_format" = "Versiunea %@";
-"about.description" = "Monitor de rețea din bara de meniu: ping periodic către un host la alegere, cu indicator de calitate și procent de pachete pierdute.";
+"about.description" = "Monitor de rețea pentru bara de meniuri: ping periodic către o destinație aleasă, cu indicator de calitate și procent de pachete pierdute.";
 "about.repository" = "Depozit pe GitHub";
-
-"about.support_text" = "PingSentry este gratuit — dacă îți place, simte-te liber să [îmi oferi o cafea ☕](https://ko-fi.com/gaskb).";
+"about.support_text" = "PingSentry este gratuit — dacă vă place, nu ezitați să [îmi oferiți o cafea ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Statistici";
 "stats.current_session" = "Sesiunea curentă";
-"stats.lifetime" = "Total (pentru acest host)";
+"stats.lifetime" = "Istoric (acest host)";
 "stats.total" = "Ping-uri totale";
 "stats.successful" = "Reușite";
 "stats.failed" = "Eșuate";
 "stats.average" = "Medie";
 "stats.fastest" = "Cel mai rapid";
 "stats.slowest" = "Cel mai lent";
+"stats.reset_session" = "Resetează sesiunea";
+"stats.reset_lifetime" = "Resetează istoricul";
+"stats.reset_lifetime_confirm" = "Resetați toate statisticile salvate pentru acest host?";
+"stats.reset" = "Resetează";
+"stats.cancel" = "Anulează";
 
 /* Notifications */
 "notification.host_down_format" = "%@ nu răspunde (%d ping-uri eșuate consecutive)";

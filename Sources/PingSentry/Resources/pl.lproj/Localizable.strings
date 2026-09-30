@@ -2,20 +2,28 @@
 "menu.ping_now" = "Pinguj teraz";
 "menu.stats" = "Statystyki…";
 "menu.settings" = "Ustawienia…";
-"menu.about" = "O aplikacji PingSentry";
+"menu.about" = "O programie PingSentry";
 "menu.quit" = "Zakończ";
 "menu.last_ping" = "Ostatni ping";
-"menu.timeout" = "Przekroczono czas";
-"menu.packet_loss_format" = "Utracone pakiety: %d%% (ostatnie %d)";
+"menu.timeout" = "Przekroczono limit czasu";
+"menu.packet_loss_format" = "Utrata pakietów: %d%% (ostatnie %d)";
+"menu.retry_now" = "Ponów teraz";
+
+/* Monitor States */
+"state.running" = "Uruchomiony";
+"state.retrying" = "Ponawianie";
+"state.failed" = "Błąd połączenia";
 
 /* Settings */
 "settings.section.connection" = "Połączenie";
 "settings.host_placeholder" = "Host lub IP";
 "settings.apply" = "Zastosuj";
-"settings.interval_format" = "Odstęp między pingami: %d s";
-"settings.window_format" = "Okno obliczania strat: %d pingów";
-"settings.section.display" = "Co pokazywać na pasku menu";
-"settings.show_bars" = "Ikona z paskami";
+"settings.host_invalid" = "Nieprawidłowa nazwa hosta lub adres IP";
+"settings.host_empty" = "Pole hosta nie może być puste";
+"settings.interval_format" = "Interwał pingu: %d s";
+"settings.window_format" = "Okno utraty pakietów: %d pingów";
+"settings.section.display" = "Elementy paska menu";
+"settings.show_bars" = "Ikona kresek";
 "settings.show_latency" = "Opóźnienie (ms)";
 "settings.show_loss" = "Procent utraconych pakietów";
 "settings.section.notifications" = "Powiadomienia";
@@ -26,27 +34,31 @@
 "settings.launch_at_login" = "Uruchamiaj PingSentry przy logowaniu";
 "settings.login_item_error_format" = "Niedostępne: %@";
 "settings.section.language" = "Język";
-"language.system" = "Język systemu";
+"language.system" = "Język systemowy";
 
 /* About */
-"about.window_title" = "O aplikacji PingSentry";
+"about.window_title" = "O programie PingSentry";
 "about.version_format" = "Wersja %@";
-"about.description" = "Monitor sieci na pasku menu: okresowy ping do wybranego hosta, ze wskaźnikiem jakości i procentem utraconych pakietów.";
+"about.description" = "Monitor sieci na pasku menu: okresowe pingowanie wybranego hosta ze wskaźnikiem jakości i utraty pakietów.";
 "about.repository" = "Repozytorium na GitHub";
-
-"about.support_text" = "PingSentry jest darmowy — jeśli Ci się podoba, możesz [postawić mi kawę ☕](https://ko-fi.com/gaskb).";
+"about.support_text" = "PingSentry jest darmowy — jeśli Ci się podoba, [postaw mi kawę ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Statystyki";
 "stats.current_session" = "Bieżąca sesja";
-"stats.lifetime" = "Od zawsze (dla tego hosta)";
-"stats.total" = "Pingi łącznie";
+"stats.lifetime" = "Łącznie (ten host)";
+"stats.total" = "Wszystkie pingi";
 "stats.successful" = "Udane";
 "stats.failed" = "Nieudane";
 "stats.average" = "Średnia";
 "stats.fastest" = "Najszybszy";
 "stats.slowest" = "Najwolniejszy";
+"stats.reset_session" = "Zresetuj sesję";
+"stats.reset_lifetime" = "Zresetuj statystyki";
+"stats.reset_lifetime_confirm" = "Zresetować zapisane statystyki dla tego hosta?";
+"stats.reset" = "Zresetuj";
+"stats.cancel" = "Anuluj";
 
 /* Notifications */
-"notification.host_down_format" = "%@ nie odpowiada (%d kolejnych nieudanych pingów)";
-"notification.host_up_format" = "%@ jest znów dostępny";
+"notification.host_down_format" = "%@ nie odpowiada (%d nieudanych pingów z rzędu)";
+"notification.host_up_format" = "%@ jest ponownie osiągalny";

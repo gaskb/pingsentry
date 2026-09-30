@@ -1,22 +1,30 @@
 /* Menu */
 "menu.ping_now" = "立即 Ping";
-"menu.stats" = "统计…";
+"menu.stats" = "统计数据…";
 "menu.settings" = "设置…";
 "menu.about" = "关于 PingSentry";
 "menu.quit" = "退出";
-"menu.last_ping" = "上次 Ping";
+"menu.last_ping" = "最近延迟";
 "menu.timeout" = "超时";
-"menu.packet_loss_format" = "丢包率：%d%%（最近 %d 次）";
+"menu.packet_loss_format" = "丢包率：%d%% (最近 %d 次)";
+"menu.retry_now" = "立即重试";
+
+/* Monitor States */
+"state.running" = "运行中";
+"state.retrying" = "重试中";
+"state.failed" = "连接错误";
 
 /* Settings */
-"settings.section.connection" = "连接";
+"settings.section.connection" = "连接设置";
 "settings.host_placeholder" = "主机或 IP";
 "settings.apply" = "应用";
+"settings.host_invalid" = "无效的主机名或 IP 地址";
+"settings.host_empty" = "主机名不能为空";
 "settings.interval_format" = "Ping 间隔：%d 秒";
-"settings.window_format" = "丢包率计算窗口：%d 次";
+"settings.window_format" = "丢包统计窗口：%d 次";
 "settings.section.display" = "菜单栏显示内容";
 "settings.show_bars" = "信号条图标";
-"settings.show_latency" = "延迟（毫秒）";
+"settings.show_latency" = "延迟 (ms)";
 "settings.show_loss" = "丢包百分比";
 "settings.section.notifications" = "通知";
 "settings.notify_toggle" = "主机无响应或恢复时通知我";
@@ -31,22 +39,26 @@
 /* About */
 "about.window_title" = "关于 PingSentry";
 "about.version_format" = "版本 %@";
-"about.description" = "菜单栏网络监控工具：定期 Ping 你选择的主机，并显示质量指示和丢包百分比。";
+"about.description" = "菜单栏网络监控工具：定期 ping 自定义主机，显示信号质量和丢包率。";
 "about.repository" = "GitHub 仓库";
-
-"about.support_text" = "PingSentry 是免费的——如果你喜欢，欢迎[请我喝杯咖啡 ☕](https://ko-fi.com/gaskb)。";
+"about.support_text" = "PingSentry 免费开源 — 如果您喜欢，欢迎 [请我喝杯咖啡 ☕](https://ko-fi.com/gaskb)。";
 
 /* Stats */
-"stats.window_title" = "统计";
-"stats.current_session" = "当前会话";
-"stats.lifetime" = "历史累计（此主机）";
-"stats.total" = "Ping 总数";
+"stats.window_title" = "统计数据";
+"stats.current_session" = "本次会话";
+"stats.lifetime" = "历史统计 (当前主机)";
+"stats.total" = "总 Ping 次数";
 "stats.successful" = "成功";
 "stats.failed" = "失败";
-"stats.average" = "平均值";
-"stats.fastest" = "最快";
-"stats.slowest" = "最慢";
+"stats.average" = "平均延迟";
+"stats.fastest" = "最低延迟";
+"stats.slowest" = "最高延迟";
+"stats.reset_session" = "重置本次会话";
+"stats.reset_lifetime" = "重置历史数据";
+"stats.reset_lifetime_confirm" = "确定要重置该主机的历史统计数据吗？";
+"stats.reset" = "重置";
+"stats.cancel" = "取消";
 
 /* Notifications */
-"notification.host_down_format" = "%@ 无响应（连续 %d 次 Ping 失败）";
-"notification.host_up_format" = "%@ 已恢复可访问";
+"notification.host_down_format" = "%@ 无响应 (连续 %d 次 ping 失败)";
+"notification.host_up_format" = "%@ 已恢复连接";

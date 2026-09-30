@@ -22,6 +22,7 @@ final class PingMonitor: ObservableObject {
     @Published private(set) var lastFailed: Bool = false
     @Published private(set) var sessionStats = PingStats()
     @Published private(set) var lifetimeStats = PingStats()
+    @Published private(set) var state: MonitorState = .idle
 
     private(set) var host: String
     var intervalSeconds: Double
@@ -62,6 +63,9 @@ final class PingMonitor: ObservableObject {
         pinger.onResult = { [weak self] result in
             self?.record(result)
         }
+        pinger.onStateChanged = { [weak self] newState in
+            self?.state = newState
+        }
         pinger.start(host: host, intervalSeconds: intervalSeconds)
     }
 
@@ -79,7 +83,18 @@ final class PingMonitor: ObservableObject {
         restart()
     }
 
+    func resetSessionStats() {
+        sessionStats = PingStats()
+    }
+
+    func resetLifetimeStats() {
+        lifetimeStats = PingStats()
+        LifetimeStatsStore.save(lifetimeStats, for: host)
+        LifetimeStatsStore.flush()
+    }
+
     var quality: SignalQuality {
+        if state.isFailed { return .none }
         if lossPercent >= 50 { return .none }
         guard !lastFailed, let latency = lastLatencyMs else {
             return .poor

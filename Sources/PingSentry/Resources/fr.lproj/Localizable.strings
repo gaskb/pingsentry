@@ -1,5 +1,5 @@
 /* Menu */
-"menu.ping_now" = "Ping maintenant";
+"menu.ping_now" = "Envoyer un ping maintenant";
 "menu.stats" = "Statistiques…";
 "menu.settings" = "Réglages…";
 "menu.about" = "À propos de PingSentry";
@@ -7,15 +7,23 @@
 "menu.last_ping" = "Dernier ping";
 "menu.timeout" = "Délai dépassé";
 "menu.packet_loss_format" = "Perte de paquets : %d%% (%d derniers)";
+"menu.retry_now" = "Réessayer";
+
+/* Monitor States */
+"state.running" = "En cours";
+"state.retrying" = "Nouvelle tentative";
+"state.failed" = "Erreur de connexion";
 
 /* Settings */
 "settings.section.connection" = "Connexion";
 "settings.host_placeholder" = "Hôte ou IP";
 "settings.apply" = "Appliquer";
-"settings.interval_format" = "Intervalle entre les pings : %d s";
-"settings.window_format" = "Fenêtre de calcul des pertes : %d pings";
-"settings.section.display" = "À afficher dans la barre de menus";
-"settings.show_bars" = "Icône à barres";
+"settings.host_invalid" = "Nom d'hôte ou adresse IP invalide";
+"settings.host_empty" = "L'hôte ne peut pas être vide";
+"settings.interval_format" = "Intervalle de ping : %d s";
+"settings.window_format" = "Fenêtre de perte : %d pings";
+"settings.section.display" = "Affichage dans la barre des menus";
+"settings.show_bars" = "Icône de barres";
 "settings.show_latency" = "Latence (ms)";
 "settings.show_loss" = "Pourcentage de perte de paquets";
 "settings.section.notifications" = "Notifications";
@@ -31,21 +39,25 @@
 /* About */
 "about.window_title" = "À propos de PingSentry";
 "about.version_format" = "Version %@";
-"about.description" = "Moniteur réseau dans la barre de menus : ping périodique vers un hôte de votre choix, avec un indicateur de qualité et le pourcentage de paquets perdus.";
+"about.description" = "Moniteur réseau pour la barre des menus : envoie périodiquement des pings vers un hôte au choix, avec indicateur de qualité et taux de perte.";
 "about.repository" = "Dépôt sur GitHub";
-
-"about.support_text" = "PingSentry est gratuite — si vous l'aimez, n'hésitez pas à [m'offrir un café ☕](https://ko-fi.com/gaskb).";
+"about.support_text" = "PingSentry est gratuit — si vous l'appréciez, n'hésitez pas à [m'offrir un café ☕](https://ko-fi.com/gaskb).";
 
 /* Stats */
 "stats.window_title" = "Statistiques";
 "stats.current_session" = "Session en cours";
-"stats.lifetime" = "Depuis toujours (pour cet hôte)";
+"stats.lifetime" = "Historique (cet hôte)";
 "stats.total" = "Pings totaux";
 "stats.successful" = "Réussis";
 "stats.failed" = "Échoués";
 "stats.average" = "Moyenne";
-"stats.fastest" = "Le plus rapide";
-"stats.slowest" = "Le plus lent";
+"stats.fastest" = "Plus rapide";
+"stats.slowest" = "Plus lent";
+"stats.reset_session" = "Réinitialiser la session";
+"stats.reset_lifetime" = "Réinitialiser l'historique";
+"stats.reset_lifetime_confirm" = "Réinitialiser les statistiques globales pour cet hôte ?";
+"stats.reset" = "Réinitialiser";
+"stats.cancel" = "Annuler";
 
 /* Notifications */
 "notification.host_down_format" = "%@ ne répond pas (%d pings consécutifs échoués)";
